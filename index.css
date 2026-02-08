@@ -1,0 +1,1876 @@
+/* ================================================= */
+/* RESET & BASE STYLES                              */
+/* ================================================= */
+:root {
+    /* ძირითადი ფერები */
+    --primary-blue: #3498db;
+    --primary-red: #e74c3c;
+    --brand-blue: #3a86ff;
+    --brand-navy: #001e62;
+
+    /* ფონი და ტექსტი */
+    --bg-light: #f8fafc;
+    --slate-bg: #0f172a;
+    --slate-dark: #0f172a;
+    /* დუბლიკატია, მაგრამ ზოგან ასე გიწერია და იყოს */
+    --dark-slate: #1e293b;
+    --text-muted: #64748b;
+    --text-slate: #94a3b8;
+    --text-light: #f1f5f9;
+    --white: #ffffff;
+
+    /* ზომები და ეფექტები */
+    --header-height: 80px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* დაამატე ეს ორი ხაზი */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+html {
+    /* Allows smooth scrolling for anchor links */
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--dark-slate);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+
+    /* --- THE FIX --- */
+    /* 1. Use 'clip' instead of 'hidden' if supported. 
+       It prevents horizontal scroll WITHOUT breaking 'sticky' */
+    overflow-x: clip;
+
+    /* 2. Remove 'overflow-y: auto' from body. 
+       Let the 'html' handle the natural window scroll. */
+
+}
+
+/* Fallback for older browsers that don't support 'clip' */
+@supports not (overflow-x: clip) {
+    body {
+        overflow-x: hidden;
+    }
+}
+
+h1,
+h2,
+h3,
+h4 {
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    /* შეამცირე 20-დან 15-მდე */
+    width: 100%;
+    /* დაამატე ეს */
+}
+
+/* ================================================= */
+/* HEADER & NAVIGATION                              */
+/* ================================================= */
+.header {
+    background-color: white;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: var(--header-height);
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease;
+    will-change: transform;
+}
+
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.header-hidden {
+    transform: translateY(-100%);
+    /* ჰედერი ავა ზემოთ და დაიმალება */
+}
+
+/* Logo */
+.logo-img {
+    height: 40px;
+    transition: var(--transition);
+}
+
+.logo a:hover .logo-img {
+    transform: scale(1.05);
+}
+
+/* Navigation */
+.navbar {
+    display: flex;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    /* წერტილების მოშორება მთავარ მენიუში */
+    margin: 0;
+    padding: 0;
+    gap: 5px;
+}
+
+.nav-item {
+    position: relative;
+    list-style: none;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    /* შეამცირე 8-დან 6-მდე */
+    padding: 8px 10px;
+    /* შეამცირე 10px 15px-დან */
+    color: var(--dark-slate);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+    border-radius: 6px;
+}
+
+.nav-link:hover {
+    background-color: rgba(52, 152, 219, 0.08);
+    color: var(--primary-blue);
+}
+
+.nav-link i {
+    font-size: 1.1rem;
+}
+
+.dropdown-icon {
+    font-size: 0.8rem !important;
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+}
+
+/* Charger Icons in Nav */
+.charger-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-right: 8px;
+}
+
+.ac-icon-small {
+    color: #3498db;
+    font-size: 14px;
+}
+
+.dc-icon-small {
+    color: #e74c3c;
+    font-size: 14px;
+    transform: rotate(45deg);
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 220px;
+    /* შეამცირე 260-დან */
+    max-width: 90vw;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: var(--transition);
+    padding: 10px 0;
+    list-style: none;
+    /* წერტილების მოშორება ჩამოსაშლელ სიაში */
+    margin: 0;
+}
+
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown:hover .dropdown-icon {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu li {
+    list-style: none;
+    /* დამატებითი დაზღვევა წერტილების წინააღმდეგ */
+    border-bottom: 1px solid #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown-menu li:last-child {
+    border-bottom: none;
+}
+
+/* Charger Options */
+.charger-option {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 20px !important;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    color: inherit;
+}
+
+.charger-option:hover {
+    background-color: #f8f9fa;
+}
+
+.charger-type {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 5px;
+}
+
+.ac-option {
+    color: #3498db;
+}
+
+.dc-option {
+    color: #e74c3c;
+}
+
+/* AC/DC Icons */
+.wave-small {
+    width: 20px;
+    height: 12px;
+    background:
+        radial-gradient(circle at 5px 6px, #3498db 1.5px, transparent 2px),
+        radial-gradient(circle at 15px 6px, #3498db 1.5px, transparent 2px);
+}
+
+.battery-small {
+    width: 20px;
+    height: 12px;
+    background: white;
+    border: 1px solid #e74c3c;
+    border-radius: 2px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.battery-small:after {
+    content: "";
+    position: absolute;
+    right: -3px;
+    top: 3px;
+    width: 1px;
+    height: 4px;
+    background: #e74c3c;
+}
+
+.pos-small,
+.neg-small {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: #e74c3c;
+    background: #2c3e50;
+}
+
+
+.charger-option small {
+    color: #7f8c8d;
+    font-size: 11px;
+    margin-left: 32px;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #ddd, transparent);
+    margin: 8px 0;
+}
+
+.all-products {
+    color: #2c3e50 !important;
+    font-weight: 500;
+    padding: 12px 20px !important;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.all-products i {
+    color: #3498db;
+}
+
+.all-products:hover {
+    background-color: #f8f9fa;
+    color: #3498db !important;
+}
+
+
+#languageSwitcherDesktop {
+    position: relative;
+    display: block;
+}
+
+.mobile-lang-switcher-item {
+    display: none;
+}
+
+.language-switcher {
+    position: relative;
+}
+
+.lang-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 15px;
+    color: #1e293b;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    white-space: nowrap;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    white-space: nowrap;
+    display: flex;
+    flex-shrink: 0;
+}
+
+.lang-btn:hover {
+    background-color: rgba(52, 152, 219, 0.2);
+    color: #3498db;
+}
+
+.dual-flags {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.flag-image {
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    object-fit: cover;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.current-flag {
+    width: 22px;
+    height: 16px;
+    z-index: 2;
+}
+
+.secondary-flag {
+    width: 18px;
+    height: 14px;
+    margin-left: -8px;
+    opacity: 0.8;
+    z-index: 1;
+}
+
+.lang-code {
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.lang-arrow {
+    font-size: 0.8rem !important;
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+    color: inherit;
+}
+
+.language-switcher.active .lang-arrow {
+    transform: rotate(180deg);
+}
+
+.lang-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 160px;
+    /* შეამცირე 200-დან 160-მდე */
+    max-width: 90vw;
+    /* დაზღვევა: ეკრანის 90%-ზე მეტი არასდროს იყოს */
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    overflow: hidden;
+    padding: 10px 0;
+    margin-top: 5px;
+}
+
+#languageSwitcherDesktop.active .lang-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.lang-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    transition: all 0.3s ease;
+    color: #333;
+    text-decoration: none;
+}
+
+.lang-option:hover {
+    background-color: rgba(52, 152, 219, 0.2);
+    color: #3498db;
+}
+
+
+
+.option-flag {
+    width: 20px;
+    height: 15px;
+    flex-shrink: 0;
+}
+
+.lang-name {
+    flex: 1;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+    display: none;
+    font-size: 1.5rem;
+    color: #1e293b;
+    cursor: pointer;
+    padding: 10px;
+    transition: all 0.3s ease;
+    background: none;
+    border: none;
+}
+
+.mobile-menu-btn.active {
+    color: #3498db;
+}
+
+
+/* Universal Button Styling */
+.cta-button,
+.certification-button,
+.aboutus-button,
+.gallery-button {
+    display: inline-block;
+    padding: 16px 32px;
+    background-color: var(--primary-blue);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+    border: none;
+    cursor: pointer;
+    max-width: 100%;
+    /* ღილაკი ეკრანზე დიდი არასდროს იქნება */
+    white-space: normal;
+    /* ტექსტი გადავა მეორე ხაზზე თუ არ დაეტევა */
+    text-align: center;
+    word-break: break-word;
+}
+
+.cta-button:hover,
+.certification-button:hover,
+.aboutus-button:hover,
+.gallery-button:hover {
+    background-color: #2980b9;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.5);
+
+}
+
+/* ================================================= */
+/* 5. NAVIGATION ARROWS                              */
+/* ================================================= */
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+    color: white;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: var(--transition);
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    text-decoration: none;
+}
+
+.prev {
+    left: 30px;
+}
+
+.next {
+    right: 30px;
+}
+
+/* ================================================= */
+/* HERO SLIDESHOW                                   */
+/* ================================================= */
+.slideshow-container.full-width-hero {
+    margin-top: 0;
+    /* Adjusted for seamless look */
+    max-width: none;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.mySlides {
+    display: none;
+    position: relative;
+    overflow: hidden;
+    height: 85vh;
+}
+
+.mySlides.active {
+    display: block;
+}
+
+.slideshow-container.full-width-hero .mySlides img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Ken Burns Effect */
+.ken-burns {
+    width: 100%;
+    height: 100%;
+    transform: scale(1);
+    transition: transform 8s ease-out;
+}
+
+.mySlides.active .ken-burns {
+    transform: scale(1.1);
+}
+
+/* ================================================= */
+/* 3. SLIDE CAPTION & TYPOGRAPHY                     */
+/* ================================================= */
+.slide-caption-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    /* Aligns content to the left */
+    text-align: left;
+    /* Gradient overlay for readability */
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0) 100%);
+    color: white;
+    padding: 0 10%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    z-index: 2;
+}
+
+.mySlides.active .slide-caption-text {
+    opacity: 1;
+}
+
+/* Heading Style */
+.slide-caption-text h2 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    max-width: 700px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+
+    /* Animation: Slide in from left */
+    transform: translateX(-50px);
+    opacity: 0;
+    transition: all 0.7s cubic-bezier(0.2, 1, 0.3, 1) 0.3s;
+}
+
+/* Paragraph Style */
+.slide-caption-text p {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 500px;
+    line-height: 1.6;
+    border-left: 3px solid var(--primary-blue);
+    padding-left: 20px;
+    margin-bottom: 35px;
+
+    /* Animation: Slide in from left with more delay */
+    transform: translateX(-40px);
+    opacity: 0;
+    transition: all 0.7s cubic-bezier(0.2, 1, 0.3, 1) 0.5s;
+}
+
+/* ================================================= */
+/* 4. BUTTONS & ANIMATIONS                           */
+/* ================================================= */
+
+/* Initial state for all button wrappers in your HTML */
+.slide-caption-products,
+.slide-caption-certification,
+.slide-caption-aboutus,
+.slide-caption-gallery {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all 0.7s cubic-bezier(0.2, 1, 0.3, 1) 0.7s;
+}
+
+/* Trigger Animations when Slide is Active */
+.mySlides.active .slide-caption-text h2,
+.mySlides.active .slide-caption-text p,
+.mySlides.active .slide-caption-products,
+.mySlides.active .slide-caption-certification,
+.mySlides.active .slide-caption-aboutus,
+.mySlides.active .slide-caption-gallery {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* Universal Button Styling */
+.cta-button,
+.certification-button,
+.aboutus-button,
+.gallery-button {
+    display: inline-block;
+    padding: 16px 32px;
+    background-color: var(--primary-blue);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+    border: none;
+    cursor: pointer;
+}
+
+.cta-button:hover,
+.certification-button:hover,
+.aboutus-button:hover,
+.gallery-button:hover {
+    background-color: #2980b9;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.5);
+}
+
+/* ================================================= */
+/* 5. NAVIGATION ARROWS                              */
+/* ================================================= */
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+    color: white;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: var(--transition);
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    text-decoration: none;
+}
+
+.prev {
+    left: 30px;
+}
+
+.next {
+    right: 30px;
+}
+
+.prev:hover,
+.next:hover {
+    background-color: var(--primary-blue);
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* ================================================= */
+/* VALUE PROPOSITIONS                               */
+/* ================================================= */
+.value-props-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    padding: 60px 20px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.prop-card {
+    background: white;
+    padding: 30px 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 5px solid transparent;
+}
+
+.prop-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.prop-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.prop-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.prop-card p {
+    font-size: 0.95rem;
+    color: #7f8c8d;
+}
+
+.ac-color {
+    color: #3498db;
+    border-color: #3498db;
+}
+
+.dc-color {
+    color: #e74c3c;
+    border-color: #e74c3c;
+}
+
+.safety-color {
+    color: #27ae60;
+    border-color: #27ae60;
+}
+
+.support-color {
+    color: #f39c12;
+    border-color: #f39c12;
+}
+
+/* ================================================= */
+/* PROMO SECTION                                    */
+/* ================================================= */
+.promo-section {
+    background-color: #eae9e9;
+    padding: 80px 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.promo-section h1 {
+    color: #222;
+    margin-bottom: 40px;
+    font-weight: 700;
+    line-height: 1.2;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.promo-section h1:not(:lang(ka)) {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    /* Uses fluid sizing */
+    white-space: normal;
+    /* CHANGED: Allow wrapping to prevent pushing the page right */
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.promo-section h1:lang(ka) {
+    font-size: clamp(1.5rem, 6vw, 2.3rem);
+    /* Dynamically shrinks */
+    white-space: normal !important;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 90%;
+    margin: 0 auto 40px auto;
+}
+
+.promo-img {
+    display: block;
+    width: 100%;
+    max-width: 950px;
+    height: auto;
+    filter: drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.15));
+    transition: transform 0.3s ease;
+}
+
+.promo-img:hover {
+    transform: scale(1.01);
+}
+
+/* ================================================= */
+/* VIDEO INFO SECTION                               */
+/* ================================================= */
+.video-info-section {
+    padding: 100px 0;
+    background-color: #eae9e9;
+}
+
+.video-info-flex {
+    display: flex;
+    align-items: stretch;
+    gap: 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.video-column {
+    flex: 1.6;
+    display: flex;
+}
+
+.text-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.video-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.video-container video {
+    width: 100%;
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+.video-container.is-playing {
+    transform: scale(1.05);
+    z-index: 10;
+}
+
+.text-column h2 {
+    font-size: 2.8rem;
+    color: #222;
+    margin-bottom: 20px;
+}
+
+.text-column p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+}
+
+.feature-list li {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.feature-list i {
+    color: #007bff;
+}
+
+/* ================================================= */
+/* COMPATIBILITY SLIDER                             */
+/* ================================================= */
+.compatibility-section {
+    padding: 20px 0;
+    background-color: #eae9e9;
+    border-top: 1px solid #eee;
+    text-align: center;
+    overflow: hidden;
+    /* Clips the animation path */
+    width: 100%;
+}
+
+.logo-slider {
+    overflow: hidden;
+    width: 100%;
+    max-width: 100vw;
+    position: relative;
+    contain: paint;
+    /* Advanced: limits the browser render area to this box */
+}
+
+.compatibility-section h3 {
+    font-size: 0.7rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+}
+
+.logo-slider {
+    overflow: hidden;
+    width: 100%;
+    max-width: 100vw;
+    /* Forces it to respect the viewport width */
+    position: relative;
+    /* This prevents the "invisible" part of the animation from creating a scrollbar */
+    contain: paint;
+}
+
+.logo-track {
+    display: inline-flex;
+    /* Changed from inline-block */
+    animation: scroll 20s linear infinite;
+    will-change: transform;
+    /* Helps with zoom performance */
+}
+
+.logo-track span {
+    font-size: 2rem;
+    font-weight: 800;
+    color: black;
+    margin: 0 40px;
+    filter: grayscale(1);
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.logo-slider:hover .logo-track {
+    animation-play-state: paused;
+}
+
+/* ================================================= */
+/* APP SECTION                                      */
+/* ================================================= */
+/* ================================================= */
+/* RESTORED APP SECTION (Original Design)            */
+/* ================================================= */
+.app-instruction-section {
+    background-color: #0f172a;
+    color: white;
+    padding-top: 150px;
+    padding-bottom: 150px;
+    /* Keeping your original slant */
+    clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
+    margin-top: -80px;
+    position: relative;
+    z-index: 10;
+    display: flow-root;
+    clear: both;
+}
+
+.app-flex-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.app-image-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    /* Fixed: Stack image and buttons */
+    justify-content: center;
+    align-items: center;
+}
+
+.app-mockup {
+    width: 100%;
+    max-width: 320px;
+    filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.5));
+    margin-bottom: 30px;
+    /* Space between phone and buttons */
+}
+
+/* Restored Glass-morphism Steps */
+.instruction-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 25px;
+    margin-bottom: 40px;
+    padding: 30px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.instruction-step:hover {
+    background: rgba(255, 255, 255, 0.07);
+    transform: translateX(10px);
+}
+
+/* ================================================= */
+/* NEW FIXED DOWNLOAD BUTTONS (Professional Style)   */
+/* ================================================= */
+.download-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.store-link {
+    background: #1e293b;
+    color: white !important;
+    /* Ensure text is white */
+    padding: 10px 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Snappy hover */
+}
+
+/* Hover effect */
+.store-link:hover {
+    background: #0f172a;
+    transform: translateY(-5px);
+    border-color: #3498db;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.store-link i {
+    font-size: 1.6rem;
+}
+
+/* Small label + Big text layout */
+.btn-content {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    line-height: 1.2;
+}
+
+.btn-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    color: #94a3b8;
+}
+
+.btn-text {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+/* Responsive fix for mobile */
+@media (max-width: 768px) {
+    .app-flex-container {
+        flex-direction: column;
+    }
+
+    .download-buttons {
+        width: 100%;
+    }
+}
+
+/* ================================================= */
+/* FOOTER                                            */
+/* ================================================= */
+
+/* ================================================= */
+/* RESPONSIVE DESIGN                                */
+/* ================================================= */
+
+/* Tablet (900px and below) */
+@media (max-width: 900px) {
+
+
+    /* Slideshow */
+    .slideshow-container.full-width-hero .mySlides img,
+    .mySlides {
+        height: 70vh;
+    }
+
+    .slide-caption-text h2 {
+        font-size: 1.8rem;
+        max-width: 80%;
+    }
+
+    .slide-caption-text p {
+        font-size: 0.95rem;
+        max-width: 90%;
+    }
+
+    /* Value Props */
+    .value-props-section {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+
+    /* Video Info */
+    .video-info-flex {
+        flex-direction: column;
+        text-align: center;
+        padding: 0 20px;
+    }
+
+    .feature-list li {
+        justify-content: center;
+    }
+
+    /* App Section */
+    .app-flex-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .instruction-step {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        text-align: center;
+    }
+
+    /* Promo Section */
+    .promo-section h1:not(:lang(ka)) {
+        white-space: normal;
+        font-size: 2.2rem;
+    }
+}
+
+/* Mobile (768px and below) */
+@media (max-width: 768px) {
+
+    /* Slideshow */
+    .slideshow-container.full-width-hero .mySlides img,
+    .mySlides {
+        height: 60vh;
+    }
+
+    .slide-caption-text {
+        padding: 0 20px;
+    }
+
+    .slide-caption-text h2 {
+        font-size: 5.5vw;
+        margin-bottom: 5px;
+    }
+
+    .slide-caption-text p {
+        font-size: 0.85rem;
+        margin-bottom: 10px;
+    }
+
+    .cta-button {
+        padding: 8px 18px;
+        font-size: 0.85rem;
+    }
+
+    .prev,
+    .next {
+        top: 55%;
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        font-size: 16px;
+    }
+
+    /* General Sections */
+    section {
+        padding: 60px 0;
+    }
+
+    .app-instruction-section {
+        padding: 60px 0;
+        margin-top: 60px;
+        border-radius: 50px 50px 0 0;
+        clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .app-instruction-section::before {
+        top: -40px;
+        height: 40px;
+    }
+
+    .video-info-section {
+        padding: 60px 0;
+    }
+
+    .promo-section {
+        padding: 50px 15px;
+    }
+
+    .promo-section h1 {
+        font-size: 1.8rem !important;
+        margin-bottom: 25px;
+        white-space: normal !important;
+    }
+
+    .promo-img {
+        max-width: 100%;
+    }
+
+    .text-column h2 {
+        font-size: 2rem;
+    }
+
+    .text-column p {
+        font-size: 1rem;
+    }
+}
+
+/* 550px Breakpoint */
+@media (max-width: 550px) {
+
+    /* Slideshow */
+    .slideshow-container.full-width-hero .mySlides img,
+    .mySlides {
+        height: 55vh;
+    }
+
+    /* Value Props */
+    .value-props-section {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 40px 20px;
+    }
+
+    /* Download Buttons */
+    .download-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .store-link {
+        justify-content: center;
+    }
+}
+
+/* 500px Breakpoint */
+/* 500px Breakpoint */
+@media (max-width: 500px) {
+
+    /* ტექსტის გამოჩენა და გასწორება */
+    .slide-caption-text h2 {
+        display: block !important;
+        /* გაქრობის მაგივრად ვაჩენთ */
+        font-size: 1.5rem !important;
+        /* პატარა ეკრანისთვის ოპტიმალური ზომა */
+        margin-bottom: 10px;
+        text-align: center;
+        max-width: 100%;
+    }
+
+    .slide-caption-text p {
+        display: block !important;
+        /* ვაჩენთ */
+        font-size: 0.85rem !important;
+        margin-bottom: 20px;
+        text-align: center;
+        border-left: none !important;
+        /* ცენტრში ხაზი აღარ გვინდა */
+        padding-left: 0 !important;
+        max-width: 100%;
+    }
+
+    .slide-caption-text {
+        justify-content: center;
+        align-items: center !important;
+        /* ყველაფერი ცენტრში */
+        padding: 0 15px;
+        /* ვამატებთ მუქ ფონს უკეთესი კითხვადობისთვის */
+        background: rgba(0, 0, 0, 0.45) !important;
+    }
+
+    .slide-cta {
+        margin-top: 10px;
+        opacity: 1;
+        transform: none;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .cta-button,
+    .certification-button,
+    .aboutus-button,
+    .gallery-button {
+        padding: 10px 20px;
+        font-size: 0.85rem;
+    }
+}
+
+/* 400px Breakpoint */
+@media (max-width: 400px) {
+
+    /* Slideshow - ტექსტის გამოჩენა და ლამაზად გასწორება */
+    .slideshow-container.full-width-hero .mySlides img,
+    .mySlides {
+        height: 50vh;
+    }
+
+    /* აქ ვაჩენთ ტექსტს, რომელიც ადრე გათიშული იყო */
+    .slide-caption-text h2 {
+        display: block !important;
+        font-size: 1.3rem !important;
+        /* ზომა პატარა ეკრანისთვის */
+        margin-bottom: 8px;
+        text-align: center;
+        max-width: 100%;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    .slide-caption-text p {
+        display: block !important;
+        font-size: 0.8rem !important;
+        line-height: 1.3;
+        margin-bottom: 15px;
+        text-align: center;
+        border-left: none !important;
+        padding-left: 0 !important;
+        max-width: 100%;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    .slide-caption-text {
+        display: flex !important;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center !important;
+        /* ტექსტი და ღილაკები ცენტრში */
+        padding: 0 15px;
+        background: rgba(0, 0, 0, 0.4);
+        /* მსუბუქი ფონი კითხვადობისთვის */
+    }
+
+    /* ღილაკების სტილი */
+    .cta-button,
+    .certification-button,
+    .aboutus-button,
+    .gallery-button {
+        padding: 6px 14px;
+        font-size: 0.75rem;
+    }
+
+    /* --- აქედან ქვემოთ შენი ძველი კოდი უცვლელია --- */
+    /* Header */
+    .header .container {
+        padding: 0 10px;
+        height: 60px;
+    }
+
+    .navbar {
+        top: 60px;
+    }
+
+    .logo-img {
+        height: 25px;
+    }
+
+    .mobile-menu-btn {
+        font-size: 1.3rem;
+    }
+
+    /* App Section */
+    .app-flex-container {
+        padding: 0 15px;
+    }
+
+    .instruction-step {
+        padding: 20px;
+    }
+}
+
+/* ================================================= */
+/* PRODUCTS SECTION styles                           */
+/* ================================================= */
+.products-section {
+    padding: 100px 20px;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    color: lightgray;
+    margin-bottom: 10px;
+}
+
+.header-line {
+    width: 80px;
+    height: 4px;
+    background: var(--primary-blue);
+    margin: 0 auto;
+    border-radius: 2px;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.product-card {
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+    transition: var(--transition);
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.ac-border {
+    border-top: 6px solid var(--primary-blue);
+}
+
+.dc-border {
+    border-top: 6px solid var(--primary-red);
+}
+
+.product-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 6px 15px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: white;
+}
+
+.ac-bg {
+    background-color: var(--primary-blue);
+}
+
+.dc-bg {
+    background-color: var(--primary-red);
+}
+
+.product-image {
+    position: relative;
+    width: 100%;
+    /* ქმნის კვადრატულ ან მართკუთხა სივრცეს (მაგ: 4:3) */
+    aspect-ratio: 4 / 3;
+    background: #f8fafc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    /* რომ Hover-ის დროს სურათი არ გამოვიდეს გარეთ */
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    /* 'cover' ავსებს მთელ სივრცეს პროპორციების დაცვით */
+    /* თუ გინდა მთლიანი სურათი გამოჩნდეს (თეთრი გვერდებით), დატოვე 'contain' */
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.1);
+}
+
+.product-info {
+    padding: 25px;
+    /* ოდნავ შევამცირე უფრო სუფთა ვიზუალისთვის */
+    text-align: left;
+    background: white;
+}
+
+.product-info h3 {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+}
+
+.product-info p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+}
+
+.product-features {
+    list-style: none;
+    margin-bottom: 30px;
+}
+
+.product-features li {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    color: var(--dark-slate);
+}
+
+.product-features i {
+    color: #27ae60;
+    /* მწვანე სიმბოლოებისთვის */
+}
+
+.dc-btn {
+    background-color: var(--primary-red);
+    box-shadow: 0 4px 10px rgba(231, 76, 60, 0.4);
+}
+
+.dc-btn:hover {
+    background-color: #c0392b;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 80px;
+    padding: 0 20px;
+}
+
+.eyebrow-text {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--primary-blue);
+    margin-bottom: 12px;
+    opacity: 0.9;
+}
+
+.product-title {
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    /* Fluid typography */
+    font-weight: 800;
+    color: var(--dark-slate);
+    line-height: 1.1;
+    margin-bottom: 24px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.accent-text {
+    background: linear-gradient(120deg, var(--primary-blue), #2ecc71);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .section-header {
+        margin-bottom: 40px;
+    }
+
+    .product-title {
+        font-size: 1.8rem;
+    }
+}
+
+.minimal-footer {
+    background-color: #111827;
+    /* Deep Slate/Charcoal - NOT pure black */
+    padding: 30px 0;
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0.8;
+    /* Default state */
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    /* Pushes items to edges */
+    align-items: center;
+    padding: 0 40px;
+}
+
+/* Base style for all text and links */
+.footer-copy span,
+.footer-nav a,
+.footer-social a {
+    color: #94a3b8;
+    /* Muted steel blue/gray */
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    letter-spacing: 0.3px;
+    font-weight: 400;
+}
+
+/* Horizontal Nav specific spacing */
+.footer-nav {
+    display: flex;
+    gap: 30px;
+}
+
+/* Hover Effect - Changes to a clean off-white */
+.footer-nav a:hover,
+.footer-social a:hover {
+    color: #f8fafc;
+}
+
+/* Social Icon spacing */
+.footer-social {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-social i {
+    font-size: 15px;
+}
+
+/* --- Responsive Layout for Mobile --- */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        /* Stack vertically on small screens */
+        gap: 20px;
+        text-align: center;
+        padding: 40px 20px;
+    }
+
+    .footer-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px 20px;
+    }
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(calc(-100% / 2));
+    }
+
+    /* Assumes content is duplicated once */
+}
+
+
+.lang-option-btn.active {
+    background-color: var(--primary-blue);
+    color: white;
+    border-color: var(--primary-blue);
+}
+
+
+@media (max-width: 900px) {
+
+    /* Hide Desktop Switcher */
+    #languageSwitcherDesktop {
+        display: none;
+    }
+
+    .mobile-lang-switcher-item {
+        display: block;
+        padding: 15px 0;
+        border-top: 2px solid #f1f5f9;
+        margin-top: 10px;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+        z-index: 1001;
+    }
+
+    /* Modern Slide-Down Menu */
+    .navbar {
+        position: fixed;
+        /* მყარად დგას ეკრანზე */
+        top: var(--header-height);
+        left: 0;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        transform: translateY(-110%);
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+        opacity: 0;
+        visibility: hidden;
+        padding-bottom: 40px;
+        z-index: 999;
+        display: block;
+        max-height: calc(100vh - var(--header-height));
+        overflow-y: auto;
+        /* შიდა სქროლვა თუ ბევრი ლინკია */
+    }
+
+    .navbar.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Menu Item Adjustments */
+    .nav-menu {
+        flex-direction: column;
+        padding: 0 20px;
+        gap: 0;
+    }
+
+    .nav-item {
+        width: 100%;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .nav-link {
+        padding: 18px 0;
+        font-size: 1.05rem;
+        justify-content: flex-start;
+    }
+
+    /* Mobile Language Switcher Styling */
+    .language-switcher.mobile-visible .lang-dropdown {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        display: flex;
+        gap: 10px;
+        padding: 10px 0;
+        background: transparent;
+    }
+
+    .language-switcher.mobile-visible .lang-option {
+        flex: 1;
+        justify-content: center;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 12px;
+        background: #f8fafc;
+    }
+
+    .language-switcher.mobile-visible .lang-option.active {
+        border-color: var(--primary-blue);
+        background: rgba(52, 152, 219, 0.05);
+    }
+
+    /* Submenu (Dropdown) on Mobile */
+    .dropdown-menu {
+        position: static;
+        display: none;
+        /* Toggle this via JS */
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        padding-left: 20px;
+        background: #fdfdfd;
+    }
+
+    .nav-item.open .dropdown-menu {
+        display: block;
+    }
+}

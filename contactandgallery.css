@@ -1,0 +1,1014 @@
+/* ================================================= */
+/* RESET & BASE STYLES                              */
+/* ================================================= */
+:root {
+    /* ძირითადი ფერები */
+    --primary-blue: #3498db;
+    --primary-red: #e74c3c;
+    --brand-blue: #3a86ff;
+    --brand-navy: #001e62;
+
+    /* ფონი და ტექსტი */
+    --bg-light: #f8fafc;
+    --slate-bg: #0f172a;
+    --slate-dark: #0f172a;
+    /* დუბლიკატია, მაგრამ ზოგან ასე გიწერია და იყოს */
+    --dark-slate: #1e293b;
+    --text-muted: #64748b;
+    --text-slate: #94a3b8;
+    --text-light: #f1f5f9;
+    --white: #ffffff;
+
+    /* ზომები და ეფექტები */
+    --header-height: 80px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* დაამატე ეს ორი ხაზი */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+html {
+    /* Allows smooth scrolling for anchor links */
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--dark-slate);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+
+    /* --- THE FIX --- */
+    /* 1. Use 'clip' instead of 'hidden' if supported. 
+       It prevents horizontal scroll WITHOUT breaking 'sticky' */
+    overflow-x: clip;
+
+    /* 2. Remove 'overflow-y: auto' from body. 
+       Let the 'html' handle the natural window scroll. */
+
+}
+
+/* Fallback for older browsers that don't support 'clip' */
+@supports not (overflow-x: clip) {
+    body {
+        overflow-x: hidden;
+    }
+}
+
+h1,
+h2,
+h3,
+h4 {
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    /* შეამცირე 20-დან 15-მდე */
+    width: 100%;
+    /* დაამატე ეს */
+}
+
+/* ================================================= */
+/* HEADER & NAVIGATION                              */
+/* ================================================= */
+.header {
+    background-color: white;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: var(--header-height);
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease;
+    will-change: transform;
+}
+
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.header-hidden {
+    transform: translateY(-100%);
+    /* ჰედერი ავა ზემოთ და დაიმალება */
+}
+
+/* Logo */
+.logo-img {
+    height: 40px;
+    transition: var(--transition);
+}
+
+.logo a:hover .logo-img {
+    transform: scale(1.05);
+}
+
+/* Navigation */
+.navbar {
+    display: flex;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    /* წერტილების მოშორება მთავარ მენიუში */
+    margin: 0;
+    padding: 0;
+    gap: 5px;
+}
+
+.nav-item {
+    position: relative;
+    list-style: none;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    /* შეამცირე 8-დან 6-მდე */
+    padding: 8px 10px;
+    /* შეამცირე 10px 15px-დან */
+    color: var(--dark-slate);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+    border-radius: 6px;
+}
+
+.nav-link:hover {
+    background-color: rgba(52, 152, 219, 0.08);
+    color: var(--primary-blue);
+}
+
+.nav-link i {
+    font-size: 1.1rem;
+}
+
+.dropdown-icon {
+    font-size: 0.8rem !important;
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+}
+
+/* Charger Icons in Nav */
+.charger-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-right: 8px;
+}
+
+.ac-icon-small {
+    color: #3498db;
+    font-size: 14px;
+}
+
+.dc-icon-small {
+    color: #e74c3c;
+    font-size: 14px;
+    transform: rotate(45deg);
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 220px;
+    /* შეამცირე 260-დან */
+    max-width: 90vw;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: var(--transition);
+    padding: 10px 0;
+    list-style: none;
+    /* წერტილების მოშორება ჩამოსაშლელ სიაში */
+    margin: 0;
+}
+
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown:hover .dropdown-icon {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu li {
+    list-style: none;
+    /* დამატებითი დაზღვევა წერტილების წინააღმდეგ */
+    border-bottom: 1px solid #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown-menu li:last-child {
+    border-bottom: none;
+}
+
+/* Charger Options */
+.charger-option {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 20px !important;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    color: inherit;
+}
+
+.charger-option:hover {
+    background-color: #f8f9fa;
+}
+
+.charger-type {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 5px;
+}
+
+.ac-option {
+    color: #3498db;
+}
+
+.dc-option {
+    color: #e74c3c;
+}
+
+/* AC/DC Icons */
+.wave-small {
+    width: 20px;
+    height: 12px;
+    background:
+        radial-gradient(circle at 5px 6px, #3498db 1.5px, transparent 2px),
+        radial-gradient(circle at 15px 6px, #3498db 1.5px, transparent 2px);
+}
+
+.battery-small {
+    width: 20px;
+    height: 12px;
+    background: white;
+    border: 1px solid #e74c3c;
+    border-radius: 2px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.battery-small:after {
+    content: "";
+    position: absolute;
+    right: -3px;
+    top: 3px;
+    width: 1px;
+    height: 4px;
+    background: #e74c3c;
+}
+
+.pos-small,
+.neg-small {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: #e74c3c;
+    background: #2c3e50;
+}
+
+
+.charger-option small {
+    color: #7f8c8d;
+    font-size: 11px;
+    margin-left: 32px;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #ddd, transparent);
+    margin: 8px 0;
+}
+
+.all-products {
+    color: #2c3e50 !important;
+    font-weight: 500;
+    padding: 12px 20px !important;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.all-products i {
+    color: #3498db;
+}
+
+.all-products:hover {
+    background-color: #f8f9fa;
+    color: #3498db !important;
+}
+
+
+#languageSwitcherDesktop {
+    position: relative;
+    display: block;
+}
+
+.mobile-lang-switcher-item {
+    display: none;
+}
+
+.language-switcher {
+    position: relative;
+}
+
+.lang-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 15px;
+    color: #1e293b;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    white-space: nowrap;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    white-space: nowrap;
+    display: flex;
+    flex-shrink: 0;
+}
+
+.lang-btn:hover {
+    background-color: rgba(52, 152, 219, 0.2);
+    color: #3498db;
+}
+
+.dual-flags {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.flag-image {
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    object-fit: cover;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.current-flag {
+    width: 22px;
+    height: 16px;
+    z-index: 2;
+}
+
+.secondary-flag {
+    width: 18px;
+    height: 14px;
+    margin-left: -8px;
+    opacity: 0.8;
+    z-index: 1;
+}
+
+.lang-code {
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.lang-arrow {
+    font-size: 0.8rem !important;
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+    color: inherit;
+}
+
+.language-switcher.active .lang-arrow {
+    transform: rotate(180deg);
+}
+
+.lang-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 160px;
+    /* შეამცირე 200-დან 160-მდე */
+    max-width: 90vw;
+    /* დაზღვევა: ეკრანის 90%-ზე მეტი არასდროს იყოს */
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    overflow: hidden;
+    padding: 10px 0;
+    margin-top: 5px;
+}
+
+#languageSwitcherDesktop.active .lang-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.lang-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    transition: all 0.3s ease;
+    color: #333;
+    text-decoration: none;
+}
+
+.lang-option:hover {
+    background-color: rgba(52, 152, 219, 0.2);
+    color: #3498db;
+}
+
+
+
+.option-flag {
+    width: 20px;
+    height: 15px;
+    flex-shrink: 0;
+}
+
+.lang-name {
+    flex: 1;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+    display: none;
+    font-size: 1.5rem;
+    color: #1e293b;
+    cursor: pointer;
+    padding: 10px;
+    transition: all 0.3s ease;
+    background: none;
+    border: none;
+}
+
+.mobile-menu-btn.active {
+    color: #3498db;
+}
+
+
+/* Universal Button Styling */
+.cta-button,
+.certification-button,
+.aboutus-button,
+.gallery-button {
+    display: inline-block;
+    padding: 16px 32px;
+    background-color: var(--primary-blue);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+    border: none;
+    cursor: pointer;
+    max-width: 100%;
+    /* ღილაკი ეკრანზე დიდი არასდროს იქნება */
+    white-space: normal;
+    /* ტექსტი გადავა მეორე ხაზზე თუ არ დაეტევა */
+    text-align: center;
+    word-break: break-word;
+}
+
+.cta-button:hover,
+.certification-button:hover,
+.aboutus-button:hover,
+.gallery-button:hover {
+    background-color: #2980b9;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.5);
+
+}
+
+/* ================================================= */
+/* 5. NAVIGATION ARROWS                              */
+/* ================================================= */
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+    color: white;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: var(--transition);
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    text-decoration: none;
+}
+
+.prev {
+    left: 30px;
+}
+
+.next {
+    right: 30px;
+}
+
+/* --- 1. GLOBAL WRAPPER (Safety Net) --- */
+.main-content-wrapper {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    display: block;
+    /* Ensures it behaves as a block container */
+}
+
+/* --- 2. MAP SECTION --- */
+/* Section reset to ensure edge-to-edge */
+.full-map-section {
+    width: 100%;
+    position: relative;
+    line-height: 0;
+    /* Removes tiny gap at bottom of iframe */
+}
+
+.map-container {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    /* Adjust this to your preferred height */
+}
+
+.map-container iframe {
+    width: 100% !important;
+    height: 100% !important;
+    border: 0;
+}
+
+/* Floating Address Box Styling */
+.map-address-box {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+    max-width: 300px;
+    line-height: 1.6;
+    /* Restores text spacing */
+}
+
+.map-address-box h4 {
+    margin: 0 0 10px 0;
+    color: #333;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.map-address-box p {
+    margin: 5px 0;
+    color: #555;
+    font-size: 15px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .map-container {
+        height: 400px;
+    }
+
+    .map-address-box {
+        position: static;
+        /* Moves box below map on small screens */
+        max-width: 100%;
+        border-radius: 0;
+        text-align: center;
+    }
+}
+
+/* Disable interaction by default */
+.map-lock iframe {
+    pointer-events: none;
+}
+
+/* Enable interaction when the 'active' class is added */
+.map-container.active iframe {
+    pointer-events: auto;
+}
+
+/* Optional: change cursor to show it's clickable */
+.map-lock {
+    cursor: pointer;
+}
+
+[data-i18n] {
+    overflow-wrap: break-word;
+    /* Modern standard */
+    word-wrap: break-word;
+    /* Legacy support */
+    word-break: normal;
+    /* Prevents breaking in the middle of English words if possible */
+    hyphens: auto;
+    /* Adds hyphens where appropriate */
+}
+
+@media (max-width: 300px) {
+    .nav-link {
+        font-size: 14px;
+        /* Shrink font for tiny screens */
+        padding: 10px 5px;
+    }
+
+    /* Ensure the container doesn't have large fixed padding */
+    .container {
+        padding: 0 10px !important;
+    }
+}
+
+/* --- 3. CONTACT SECTION --- */
+.contact-split-section {
+    padding: 60px 0;
+    background-color: #ffffff;
+    width: 100%;
+}
+
+.contact-split-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.split-row {
+    display: flex;
+    align-items: stretch;
+    gap: 50px;
+    margin-top: 20px;
+}
+
+.contact-form-side {
+    flex: 1.2;
+    min-width: 0;
+    /* Prevents flex-child from stretching parent */
+}
+
+.contact-image-side {
+    flex: 1;
+    display: flex;
+    min-width: 0;
+}
+
+/* --- 4. FORM & GRID --- */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px 30px;
+    margin-bottom: 30px;
+}
+
+/* THE MISSING FIX: Ensures the Information box doesn't break the grid */
+.input-item.full-width {
+    grid-column: span 2;
+}
+
+.input-item {
+    position: relative;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}
+
+.input-item input,
+.input-item textarea {
+    width: 100%;
+    border: none !important;
+    outline: none !important;
+    background: transparent;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    color: var(--dark-slate);
+    padding: 5px 0;
+    box-sizing: border-box;
+    display: block;
+}
+
+/* ================================================= */
+/* PRODUCT GALLERY STYLES                           */
+/* ================================================= */
+
+.gallery-section {
+    padding: 80px 0;
+    background-color: #ffffff;
+    /* Clean white background */
+}
+
+.gallery-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-subtitle {
+    color: var(--text-muted);
+    margin-top: 12px;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* 3 column layout */
+    grid-auto-rows: 280px;
+    gap: 15px;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #eee;
+    /* Placeholder color */
+    transition: transform 0.3s ease;
+}
+
+/* Featured Large Item */
+.gallery-item.tall {
+    grid-row: span 2;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Modern Minimal Overlay */
+.gallery-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.85), transparent);
+    transform: translateY(10px);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.08);
+}
+
+.gallery-overlay .category {
+    color: var(--primary-blue);
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.gallery-overlay .project-name {
+    color: white;
+    font-size: 1.1rem;
+    margin-top: 4px;
+    font-weight: 600;
+}
+
+/* Responsiveness */
+@media (max-width: 992px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 250px;
+    }
+
+    .gallery-item.tall {
+        grid-row: span 1;
+        /* Don't be too tall on mobile */
+    }
+}
+
+/* --- 5. IMAGE --- */
+.image-wrapper {
+    width: 100%;
+    height: 100%;
+    min-height: 400px;
+}
+
+.image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+}
+
+/* --- 6. RESPONSIVE --- */
+@media (max-width: 1024px) {
+    .split-row {
+        gap: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .full-map-section {
+        height: 350px;
+    }
+
+    .map-address-box {
+        position: relative;
+        top: 0;
+        left: 0;
+        margin: -40px 20px 20px 20px;
+        min-width: 0;
+        max-width: calc(100% - 40px);
+    }
+
+    .split-row {
+        flex-direction: column;
+    }
+
+    .contact-image-side {
+        order: -1;
+        margin-bottom: 20px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Reset grid span for mobile */
+    .input-item.full-width {
+        grid-column: span 1;
+    }
+
+    .contact-form-side .cta-button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 900px) {
+
+    /* Hide Desktop Switcher */
+    #languageSwitcherDesktop {
+        display: none;
+    }
+
+    .mobile-lang-switcher-item {
+        display: block;
+        padding: 15px 0;
+        border-top: 2px solid #f1f5f9;
+        margin-top: 10px;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+        z-index: 1001;
+    }
+
+    /* Modern Slide-Down Menu */
+    .navbar {
+        position: fixed;
+        /* მყარად დგას ეკრანზე */
+        top: var(--header-height);
+        left: 0;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        transform: translateY(-110%);
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+        opacity: 0;
+        visibility: hidden;
+        padding-bottom: 40px;
+        z-index: 999;
+        display: block;
+        max-height: calc(100vh - var(--header-height));
+        overflow-y: auto;
+        /* შიდა სქროლვა თუ ბევრი ლინკია */
+    }
+
+    .navbar.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Menu Item Adjustments */
+    .nav-menu {
+        flex-direction: column;
+        padding: 0 20px;
+        gap: 0;
+    }
+
+    .nav-item {
+        width: 100%;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .nav-link {
+        padding: 18px 0;
+        font-size: 1.05rem;
+        justify-content: flex-start;
+    }
+
+    /* Mobile Language Switcher Styling */
+    .language-switcher.mobile-visible .lang-dropdown {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        display: flex;
+        gap: 10px;
+        padding: 10px 0;
+        background: transparent;
+    }
+
+    .language-switcher.mobile-visible .lang-option {
+        flex: 1;
+        justify-content: center;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 12px;
+        background: #f8fafc;
+    }
+
+    .language-switcher.mobile-visible .lang-option.active {
+        border-color: var(--primary-blue);
+        background: rgba(52, 152, 219, 0.05);
+    }
+
+    /* Submenu (Dropdown) on Mobile */
+    .dropdown-menu {
+        position: static;
+        display: none;
+        /* Toggle this via JS */
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        padding-left: 20px;
+        background: #fdfdfd;
+    }
+
+    .nav-item.open .dropdown-menu {
+        display: block;
+    }
+}

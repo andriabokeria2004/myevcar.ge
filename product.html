@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="pageTitle">AC & DC Chargers | Premium EV Solutions</title>
+    <link rel="stylesheet" href="product.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/mymobile.png" alt="Mymobile Logo" class="logo-img">
+                </a>
+            </div>
+
+            <nav class="navbar" id="mobileNavMenu">
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">
+                            <i class="fas fa-home"></i>
+                            <span data-i18n="home">Home</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="product.html" class="nav-link dropdown-toggle">
+                            <div class="charger-icon">
+                                <i class="fas fa-bolt ac-icon-small"></i>
+                                <i class="fas fa-plug dc-icon-small"></i>
+                            </div>
+                            <span data-i18n="chargers">Chargers</span>
+                            <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="product.html" class="charger-option">
+                                    <div class="charger-type ac-option">
+                                        <div class="wave-small"></div>
+                                        <span data-i18n="acChargers">AC Chargers</span>
+                                    </div>
+                                    <small data-i18n="acDesc">AC: portable, wall-mounted</small>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="product.html" class="charger-option">
+                                    <div class="charger-type dc-option">
+                                        <div class="battery-small">
+                                            <div class="pos-small"></div>
+                                            <div class="neg-small"></div>
+                                        </div>
+                                        <span data-i18n="dcChargers">DC Chargers</span>
+                                    </div>
+                                    <small data-i18n="dcDesc">Direct Current Fast Charging</small>
+                                </a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li>
+                                <a href="product.html" class="all-products">
+                                    <i class="fas fa-bolt-lightning"></i>
+                                    <span data-i18n="allProducts">All Charging Products</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="aboutus.html" class="nav-link dropdown-toggle">
+                            <i class="fas fa-info-circle"></i>
+                            <span data-i18n="about">About Us</span>
+                            <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="aboutus.html" class="charger-option">
+                                    <i class="fas fa-users"></i>
+                                    <span data-i18n="whoWeAre">Who We Are</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="aboutus.html" class="charger-option">
+                                    <i class="fas fa-award"></i>
+                                    <span data-i18n="certification">Certification</span>
+                                </a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li>
+                                <a href="#" class="all-products" id="openContactModal">
+                                    <i class="fas fa-envelope"></i>
+                                    <span data-i18n="contact">Contact Us</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-images"></i>
+                            <span data-i18n="gallery">Gallery</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item mobile-lang-switcher-item">
+                        <div class="language-switcher mobile-visible">
+                            <div class="lang-dropdown">
+                                <button class="lang-option" data-lang="en">
+                                    <img src="https://flagcdn.com/w20/us.png" class="flag-image option-flag" alt="EN">
+                                    <span class="lang-name">English</span>
+                                </button>
+                                <button class="lang-option" data-lang="ka">
+                                    <img src="https://flagcdn.com/w20/ge.png" class="flag-image option-flag" alt="KA">
+                                    <span class="lang-name">ქართული</span>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="header-right-group">
+                <div class="language-switcher" id="languageSwitcherDesktop">
+                    <button class="lang-btn" id="langToggle">
+                        <div class="dual-flags">
+                            <img src="https://flagcdn.com/w20/us.png" class="flag-image current-flag" alt="EN">
+                            <img src="https://flagcdn.com/w20/ge.png" class="flag-image secondary-flag" alt="KA">
+                        </div>
+                        <span class="lang-code">EN</span>
+                        <i class="fas fa-chevron-down lang-arrow"></i>
+                    </button>
+                    <div class="lang-dropdown" id="langDropdownDesktop">
+                        <button class="lang-option" data-lang="en">
+                            <img src="https://flagcdn.com/w20/us.png" class="flag-image option-flag" alt="EN">
+                            <span class="lang-name">English</span>
+                            <span class="lang-code-option">EN</span>
+                        </button>
+                        <button class="lang-option" data-lang="ka">
+                            <img src="https://flagcdn.com/w20/ge.png" class="flag-image option-flag" alt="KA">
+                            <span class="lang-name">ქართული</span>
+                            <span class="lang-code-option">KA</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mobile-menu-btn" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="contactModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span id="closeContactModal" class="close-btn">&times;</span>
+            <h2 data-i18n="contact">Contact Us</h2>
+            <form id="contactForm">
+                <input type="text" data-i18n="contactName" placeholder="Name" required>
+                <input type="email" data-i18n="contactEmail" placeholder="Email" required>
+                <textarea data-i18n="contactMsg" placeholder="How can we help?"></textarea>
+                <button type="submit" class="main-button" data-i18n="contactBtn">Send Message</button>
+            </form>
+        </div>
+    </div>
+    <main class="product-fullscreen-container">
+        <!-- Product 1 -->
+        <section class="product-row" data-category="DC">
+            <div class="product-image-side">
+                <div class="gallery-counter"><span class="current">1</span> / <span class="total">4</span></div>
+                <button class="nav-arrow prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="nav-arrow next"><i class="fas fa-chevron-right"></i></button>
+                <img src="images/cdz-j.png" class="main-product-img" alt="CDZ-J Charger">
+            </div>
+            <div class="product-text-side">
+                <div class="text-content">
+                    <h2 class="product-title" data-i18n="p1_title">CDZ-J</h2>
+                    <div class="kw-selector-container">
+                        <p><span data-i18n="label_power">Power Output</span>: <span class="selected-kw-text">20kW</span>
+                        </p>
+                        <div class="kw-options">
+                            <button class="kw-btn active" data-price="11400" data-kw="20kW">20kW</button>
+                            <button class="kw-btn" data-price="12450" data-kw="30kW">30kW</button>
+                            <button class="kw-btn" data-price="13000" data-kw="40kW">40kW</button>
+                        </div>
+                    </div>
+                    <div class="color-selector">
+                        <p><span data-i18n="label_color">Color</span>: <span class="selected-color-text"
+                                data-i18n="color_black">Midnight Black</span></p>
+                        <div class="swatches">
+                            <div class="swatch active" style="background-color: #1a1a1a;"
+                                data-img="images/blackcdz-j.png" data-color-key="color_black"></div>
+                            <div class="swatch" style="background-color: #555e63;" data-img="images/cdz-jgrey.png"
+                                data-color-key="color_grey"></div>
+                            <div class="swatch" style="background-color: #f37021;" data-img="images/cdz-jorange.png"
+                                data-color-key="color_orange"></div>
+                            <div class="swatch" style="background-color: #0056b3;" data-img="images/cdz-j.png"
+                                data-color-key="color_blue"></div>
+                            <div class="swatch" style="background-color: #32cd32;" data-img="images/cdz-j green.png"
+                                data-color-key="color_green"></div>
+                            <div class="swatch" style="background-color: #f5f5f5; border: 1px solid #ddd;"
+                                data-img="images/whitecdz-j.png" data-color-key="color_white"></div>
+                        </div>
+                    </div>
+                    <p class="product-description" data-i18n="p1_desc">High-efficiency DC charging module with smart
+                        load balancing.</p>
+                    <div class="price-action">
+                        <div class="price-display">
+                            <small class="starting-label">Price</small>
+                            <span class="price">₾11,400</span>
+                        </div>
+                        <button class="btn-primary" data-i18n="btn_order">Order Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product 2 -->
+        <section class="product-row reverse" data-category="DC">
+            <div class="product-image-side">
+                <div class="gallery-counter"><span class="current">1</span> / <span class="total">2</span></div>
+                <button class="nav-arrow prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="nav-arrow next"><i class="fas fa-chevron-right"></i></button>
+                <img src="images/cdzbt-black.png" class="main-product-img" alt="CDZ-BT Charger">
+            </div>
+            <div class="product-text-side">
+                <div class="text-content">
+                    <h2 class="product-title" data-i18n="p2_title">CDZ-BT</h2>
+                    <div class="kw-selector-container">
+                        <p><span data-i18n="label_power">Power Output</span>: <span class="selected-kw-text">60kW</span>
+                        </p>
+                        <div class="kw-options">
+                            <button class="kw-btn active" data-price="18250" data-kw="60kW">60kW</button>
+                            <button class="kw-btn" data-price="20000" data-kw="80kW">80kW</button>
+                        </div>
+                    </div>
+                    <div class="color-selector">
+                        <p><span data-i18n="label_edition">Edition</span>: <span class="selected-color-text"
+                                data-i18n="color_stealth">Stealth Black</span></p>
+                        <div class="swatches">
+                            <div class="swatch active" style="background-color: #1a1a1a;"
+                                data-img="images/cdzbt-black.png" data-color-key="color_black"></div>
+                            <div class="swatch" style="background-color: #555e63;" data-img="images/cdzbt-gray.png"
+                                data-color-key="color_grey"></div>
+                            <div class="swatch" style="background-color: #f37021;" data-img="images/cdzbt-orange.png"
+                                data-color-key="color_orange"></div>
+                            <div class="swatch" style="background-color: #0056b3;" data-img="images/cdzbt-blue.png"
+                                data-color-key="color_blue"></div>
+                            <div class="swatch" style="background-color: #32cd32;" data-img="images/cdzbt-green.png"
+                                data-color-key="color_green"></div>
+                            <div class="swatch" style="background-color: #f5f5f5; border: 1px solid #ddd;"
+                                data-img="images/cdzbt-white.png" data-color-key="color_white"></div>
+                        </div>
+                    </div>
+                    <p class="product-description" data-i18n="p2_desc">High-speed commercial DC charging station.</p>
+                    <div class="price-action">
+                        <div class="price-display">
+                            <span class="price">₾18,250</span>
+                        </div>
+                        <button class="btn-primary" data-i18n="btn_quote">Get Quote</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product 3 -->
+        <section class="product-row" data-category="AC">
+            <div class="product-image-side">
+                <div class="gallery-counter"><span class="current">1</span> / <span class="total">3</span></div>
+                <button class="nav-arrow prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="nav-arrow next"><i class="fas fa-chevron-right"></i></button>
+                <img src="images/cdzbtbig-black.png" class="main-product-img" alt="CDZ-BT AC Charger">
+            </div>
+            <div class="product-text-side">
+                <div class="text-content">
+                    <h2 class="product-title" data-i18n="p3_title">CDZ-BT AC</h2>
+                    <div class="kw-selector-container">
+                        <p><span data-i18n="label_power">Power Output</span>: <span class="selected-kw-text">22kW</span>
+                        </p>
+                        <div class="kw-options">
+                            <button class="kw-btn active" data-price="9750" data-kw="22kW">22kW</button>
+                            <button class="kw-btn" data-price="11250" data-kw="11kW">11kW</button>
+                            <button class="kw-btn" data-price="12500" data-kw="7kW">7kW</button>
+                        </div>
+                    </div>
+                    <div class="color-selector">
+                        <p><span data-i18n="label_finish">Finish</span>: <span class="selected-color-text"
+                                data-i18n="color_green">Eco Green</span></p>
+                        <div class="swatches">
+                            <div class="swatch active" style="background-color: #1a1a1a;"
+                                data-img="images/cdzbtbig-black.png" data-color-key="color_black"></div>
+                            <div class="swatch" style="background-color: #555e63;" data-img="images/cdzbtbig-grey.png"
+                                data-color-key="color_grey"></div>
+                            <div class="swatch" style="background-color: #f37021;" data-img="images/cdzbtbig-orange.png"
+                                data-color-key="color_orange"></div>
+                            <div class="swatch" style="background-color: #0056b3;" data-img="images/cdzbtbig-blue.png"
+                                data-color-key="color_blue"></div>
+                            <div class="swatch" style="background-color: #32cd32;" data-img="images/cdzbtbig-green.png"
+                                data-color-key="color_green"></div>
+                            <div class="swatch" style="background-color: #f5f5f5; border: 1px solid #ddd;"
+                                data-img="images/cdzbtbig-white.png" data-color-key="color_white"></div>
+                        </div>
+                    </div>
+                    <p class="product-description" data-i18n="p3_desc">Portable charging for the modern traveler.</p>
+                    <div class="price-action">
+                        <div class="price-display">
+                            <span class="price">₾9,750</span>
+                        </div>
+                        <button class="btn-primary" data-i18n="btn_order">Order Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product 4 -->
+        <section class="product-row reverse" data-category="DC">
+            <div class="product-image-side">
+                <div class="gallery-counter"><span class="current">1</span> / <span class="total">2</span></div>
+                <button class="nav-arrow prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="nav-arrow next"><i class="fas fa-chevron-right"></i></button>
+                <img src="images/CDZ-ABLACK.png" class="main-product-img" alt="CDZ-A Charger">
+            </div>
+            <div class="product-text-side">
+                <div class="text-content">
+                    <h2 class="product-title" data-i18n="p4_title">CDZ-A</h2>
+                    <div class="kw-selector-container">
+                        <p><span data-i18n="label_power">Power Output</span>: <span class="selected-kw-text">60kW</span>
+                        </p>
+                        <div class="kw-options">
+                            <button class="kw-btn active" data-price="19250" data-kw="60kW">60kW</button>
+                            <button class="kw-btn" data-price="21500" data-kw="80kW">80kW</button>
+                            <button class="kw-btn" data-price="24000" data-kw="100kW">100kW</button>
+                        </div>
+                    </div>
+                    <div class="color-selector">
+                        <p><span data-i18n="label_finish">Color</span>: <span class="selected-color-text"
+                                data-i18n="color_blue">Electric Blue</span></p>
+                        <div class="swatches">
+                            <div class="swatch active" style="background-color: #1a1a1a;"
+                                data-img="images/CDZ-ABLACK.png" data-color-key="color_black"></div>
+                            <div class="swatch" style="background-color: #555e63;" data-img="images/CDZ-AGREY.png"
+                                data-color-key="color_grey"></div>
+                            <div class="swatch" style="background-color: #f37021;" data-img="images/CDZ-AORANGE.png"
+                                data-color-key="color_orange"></div>
+                            <div class="swatch" style="background-color: #0056b3;" data-img="images/CDZ-ABLUE.png"
+                                data-color-key="color_blue"></div>
+                            <div class="swatch" style="background-color: #32cd32;" data-img="images/CDZ-AGREEN.png"
+                                data-color-key="color_green"></div>
+                            <div class="swatch" style="background-color: #f5f5f5; border: 1px solid #ddd;"
+                                data-img="images/CDZ-AWHITE.png" data-color-key="color_white"></div>
+                        </div>
+                        <p class="product-description" data-i18n="p4_desc">Slim design optimized for urban environments.
+                        </p>
+                        <div class="price-action">
+                            <div class="price-display">
+                                <span class="price">₾19,250</span>
+                            </div>
+                            <button class="btn-primary" data-i18n="btn_quote">Get Quote</button>
+                        </div>
+                    </div>
+                </div>
+        </section>
+
+        <!-- Product 5 -->
+        <section class="product-row" data-category="AC">
+            <div class="product-image-side">
+                <div class="gallery-counter"><span class="current">1</span> / <span class="total">2</span></div>
+                <button class="nav-arrow prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="nav-arrow next"><i class="fas fa-chevron-right"></i></button>
+                <img src="images/CDZ-WYBLUE LED LIGHT STRIP.png" class="main-product-img" alt="CDZ-WY Charger">
+            </div>
+            <div class="product-text-side">
+                <div class="text-content">
+                    <h2 class="product-title" data-i18n="p5_title">CDZ-WY</h2>
+                    <div class="kw-selector-container">
+                        <p><span data-i18n="label_power">Power Output</span>: <span class="selected-kw-text">22kW</span>
+                        </p>
+                        <div class="kw-options">
+                            <button class="kw-btn active" data-price="9250" data-kw="22kW">22kW</button>
+                            <button class="kw-btn" data-price="10500" data-kw="11kW">11kW</button>
+                            <button class="kw-btn" data-price="7500" data-kw="7kW">7kW</button>
+                        </div>
+                    </div>
+                    <div class="color-selector">
+                        <p><span data-i18n="label_finish">Selection</span>: <span class="selected-color-text"
+                                data-i18n="color_grey">Industrial Grey</span></p>
+                        <div class="swatches">
+                            <div class="swatch" style="background-color: #f37021;"
+                                data-img="images/CDZ-WYORANGE LIGHT STRIP.png" data-color-key="color_orange"></div>
+                            <div class="swatch" style="background-color: #0056b3;"
+                                data-img="images/CDZ-WYBLUE LED LIGHT STRIP.png" data-color-key="color_blue"></div>
+                            <div class="swatch" style="background-color: #32cd32;" data-img="images/CDZ-WY.png"
+                                data-color-key="color_green"></div>
+                        </div>
+                        <p class="product-description" data-i18n="p5_desc">Smart charging with RFID and billing
+                            integration.
+                        </p>
+                        <div class="price-action">
+                            <div class="price-display">
+                                <span class="price">₾9,250</span>
+                            </div>
+                            <button class="btn-primary" data-i18n="btn_order">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+        </section>
+
+        <!-- Product 6 -->
+        <section class="product-row reverse" data-category="DC">
+            <div class="product-image-side">
+                <div class="gallery-counter"><span class="current">1</span> / <span class="total">1</span></div>
+                <button class="nav-arrow prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="nav-arrow next"><i class="fas fa-chevron-right"></i></button>
+                <span class="badge dc" data-i18n="badge_dc">DC Fast</span>
+                <img src="images/p6-black.png" class="main-product-img" alt="CDZ-YE Charger">
+            </div>
+            <div class="product-text-side">
+                <div class="text-content">
+                    <h2 class="product-title" data-i18n="p6_title">CDZ-YE Pro</h2>
+                    <div class="kw-selector-container">
+                        <p><span data-i18n="label_power">Power Output</span>: <span class="selected-kw-text">60kW</span>
+                        </p>
+                        <div class="kw-options">
+                            <button class="kw-btn active" data-price="24750" data-kw="60kW">60kW</button>
+                            <button class="kw-btn" data-price="26500" data-kw="80kW">80kW</button>
+                            <button class="kw-btn" data-price="28500" data-kw="120kW">120kW</button>
+                            <button class="kw-btn" data-price="32000" data-kw="160kW">160kW</button>
+                            <button class="kw-btn" data-price="37500" data-kw="180kW">180kW</button>
+                            <button class="kw-btn" data-price="42000" data-kw="240kW">240kW</button>
+                        </div>
+                    </div>
+                    <div class="color-selector">
+                        <p><span data-i18n="label_finish">Finish</span>: <span class="selected-color-text"
+                                data-i18n="color_black">Midnight Black</span></p>
+                        <div class="swatches">
+                            <div class="swatch active" style="background-color: #1a1a1a;" data-img="images/p6-black.png"
+                                data-color-key="color_black"></div>
+                            <div class="swatch" style="background-color: #555e63;" data-img="images/p6-grey.png"
+                                data-color-key="color_grey"></div>
+                            <div class="swatch" style="background-color: #f37021;" data-img="images/p6-orange.png"
+                                data-color-key="color_orange"></div>
+                            <div class="swatch" style="background-color: #0056b3;" data-img="images/p6-blue.png"
+                                data-color-key="color_blue"></div>
+                            <div class="swatch" style="background-color: #32cd32;" data-img="images/p6-green.png"
+                                data-color-key="color_green"></div>
+                            <div class="swatch" style="background-color: #f5f5f5; border: 1px solid #ddd;"
+                                data-img="images/p1-white.png" data-color-key="color_white"></div>
+                        </div>
+                    </div>
+                    <p class="product-description" data-i18n="p6_desc">Liquid-cooled ultra-high-speed charging.</p>
+                    <div class="price-action">
+                        <div class="price-display">
+                            <span class="price">$24,750</span>
+                        </div>
+                        <button class="btn-primary" data-i18n="btn_quote">Get Quote</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product 7 -->
+        <section class="product-row" data-category="AC">
+            <div class="product-image-side">
+                <div class="gallery-counter"><span class="current">1</span> / <span class="total">3</span></div>
+                <button class="nav-arrow prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="nav-arrow next"><i class="fas fa-chevron-right"></i></button>
+                <span class="badge ac" data-i18n="badge_ac">AC Solution</span>
+                <img src="images/p7-blue.png" class="main-product-img" alt="CDZ-YE Mini">
+            </div>
+            <div class="product-text-side">
+                <div class="text-content">
+                    <h2 class="product-title" data-i18n="p7_title">CDZ-YE Mini</h2>
+                    <div class="kw-selector-container">
+                        <p><span data-i18n="label_power">Power Output</span>: <span class="selected-kw-text">60kW</span>
+                        </p>
+                        <div class="kw-options">
+                            <button class="kw-btn active" data-price="21625" data-kw="60kW">60kW</button>
+                            <button class="kw-btn" data-price="22655" data-kw="80kW">80kW</button>
+                            <button class="kw-btn" data-price="27105" data-kw="120kW">120kW</button>
+                            <button class="kw-btn" data-price="31155" data-kw="160kW">160kW</button>
+                            <button class="kw-btn" data-price="36095" data-kw="180kW">180kW</button>
+                            <button class="kw-btn" data-price="40575" data-kw="240kW">240kW</button>
+                        </div>
+                    </div>
+                    <div class="color-selector">
+                        <p><span data-i18n="label_finish">Finish</span>: <span class="selected-color-text"
+                                data-i18n="color_blue">Electric Blue</span></p>
+                        <div class="swatches">
+                            <div class="swatch active" style="background-color: #1a1a1a;" data-img="images/p7-black.png"
+                                data-color-key="color_black"></div>
+                            <div class="swatch" style="background-color: #555e63;" data-img="images/p7-grey.png"
+                                data-color-key="color_grey"></div>
+                            <div class="swatch" style="background-color: #f37021;" data-img="images/p7-orange.png"
+                                data-color-key="color_orange"></div>
+                            <div class="swatch" style="background-color: #0056b3;" data-img="images/p7-blue.png"
+                                data-color-key="color_blue"></div>
+                            <div class="swatch" style="background-color: #32cd32;" data-img="images/p7-green.png"
+                                data-color-key="color_green"></div>
+                            <div class="swatch" style="background-color: #f5f5f5; border: 1px solid #ddd;"
+                                data-img="images/p1-white.png" data-color-key="color_white"></div>
+                        </div>
+                    </div>
+                    <p class="product-description" data-i18n="p7_desc">The smallest high-efficiency charger in the
+                        world.</p>
+                    <div class="price-action">
+                        <div class="price-display">
+                            <span class="price">$21,625</span>
+                        </div>
+                        <button class="btn-primary" data-i18n="btn_order">Order Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product 8 -->
+        <section class="product-row reverse" data-category="AC">
+            <div class="product-image-side">
+                <div class="gallery-counter"><span class="current">1</span> / <span class="total">1</span></div>
+                <button class="nav-arrow prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="nav-arrow next"><i class="fas fa-chevron-right"></i></button>
+                <span class="badge ac" data-i18n="badge_ac">AC Solution</span>
+                <img src="images/p8-grey.png" class="main-product-img" alt="CDZ-U Charger">
+            </div>
+            <div class="product-text-side">
+                <div class="text-content">
+                    <h2 class="product-title" data-i18n="p8_title">CDZ-U</h2>
+                    <div class="kw-selector-container">
+                        <p><span data-i18n="label_power">Power Output</span>: <span class="selected-kw-text">7kW</span>
+                        </p>
+                        <div class="kw-options">
+                            <button class="kw-btn active" data-price="975" data-kw="7kW">7kW</button>
+                            <button class="kw-btn" data-price="1100" data-kw="11kW">11kW</button>
+                            <button class="kw-btn" data-price="1125" data-kw="22kW">22kW</button>
+                        </div>
+                    </div>
+                    <div class="color-selector">
+                        <p><span data-i18n="label_edition">Edition</span>: <span class="selected-color-text"
+                                data-i18n="color_grey">Industrial Grey</span></p>
+                        <div class="swatches">
+                            <div class="swatch active" style="background-color: #1a1a1a;" data-img="images/81-black.png"
+                                data-color-key="color_black"></div>
+                            <div class="swatch" style="background-color: #555e63;" data-img="images/p8-grey.png"
+                                data-color-key="color_grey"></div>
+                            <div class="swatch" style="background-color: #f37021;" data-img="images/p8-orange.png"
+                                data-color-key="color_orange"></div>
+                            <div class="swatch" style="background-color: #0056b3;" data-img="images/p8-blue.png"
+                                data-color-key="color_blue"></div>
+                            <div class="swatch" style="background-color: #32cd32;" data-img="images/p8-green.png"
+                                data-color-key="color_green"></div>
+                            <div class="swatch" style="background-color: #f5f5f5; border: 1px solid #ddd;"
+                                data-img="images/p1-white.png" data-color-key="color_white"></div>
+                        </div>
+                    </div>
+                    <p class="product-description" data-i18n="p8_desc">The ultimate solution for electric fleet
+                        terminals.</p>
+                    <div class="price-action">
+                        <div class="price-display">
+                            <span class="price">$975</span>
+                        </div>
+                        <button class="btn-primary" data-i18n="btn_quote">Get Quote</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="product.js"></script>
+</body>

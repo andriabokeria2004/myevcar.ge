@@ -1,0 +1,1307 @@
+/* ================================================= */
+/* RESET & BASE STYLES                              */
+/* ================================================= */
+:root {
+    /* ძირითადი ფერები */
+    --primary-blue: #3498db;
+    --primary-red: #e74c3c;
+    --brand-blue: #3a86ff;
+    --brand-navy: #001e62;
+
+    /* ფონი და ტექსტი */
+    --bg-light: #f8fafc;
+    --slate-bg: #0f172a;
+    --slate-dark: #0f172a;
+    /* დუბლიკატია, მაგრამ ზოგან ასე გიწერია და იყოს */
+    --dark-slate: #1e293b;
+    --text-muted: #64748b;
+    --text-slate: #94a3b8;
+    --text-light: #f1f5f9;
+    --white: #ffffff;
+
+    /* ზომები და ეფექტები */
+    --header-height: 80px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* დაამატე ეს ორი ხაზი */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+html {
+    /* Allows smooth scrolling for anchor links */
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--dark-slate);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+
+    /* --- THE FIX --- */
+    /* 1. Use 'clip' instead of 'hidden' if supported. 
+       It prevents horizontal scroll WITHOUT breaking 'sticky' */
+    overflow-x: clip;
+
+    /* 2. Remove 'overflow-y: auto' from body. 
+       Let the 'html' handle the natural window scroll. */
+
+}
+
+/* Fallback for older browsers that don't support 'clip' */
+@supports not (overflow-x: clip) {
+    body {
+        overflow-x: hidden;
+    }
+}
+
+h1,
+h2,
+h3,
+h4 {
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    /* შეამცირე 20-დან 15-მდე */
+    width: 100%;
+    /* დაამატე ეს */
+}
+
+/* ================================================= */
+/* HEADER & NAVIGATION                              */
+/* ================================================= */
+.header {
+    background-color: white;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: var(--header-height);
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease;
+    will-change: transform;
+}
+
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.header-hidden {
+    transform: translateY(-100%);
+    /* ჰედერი ავა ზემოთ და დაიმალება */
+}
+
+/* Logo */
+.logo-img {
+    height: 40px;
+    transition: var(--transition);
+}
+
+.logo a:hover .logo-img {
+    transform: scale(1.05);
+}
+
+/* Navigation */
+.navbar {
+    display: flex;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    /* წერტილების მოშორება მთავარ მენიუში */
+    margin: 0;
+    padding: 0;
+    gap: 5px;
+}
+
+.nav-item {
+    position: relative;
+    list-style: none;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    /* შეამცირე 8-დან 6-მდე */
+    padding: 8px 10px;
+    /* შეამცირე 10px 15px-დან */
+    color: var(--dark-slate);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+    border-radius: 6px;
+}
+
+.nav-link:hover {
+    background-color: rgba(52, 152, 219, 0.08);
+    color: var(--primary-blue);
+}
+
+.nav-link i {
+    font-size: 1.1rem;
+}
+
+.dropdown-icon {
+    font-size: 0.8rem !important;
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+}
+
+/* Charger Icons in Nav */
+.charger-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-right: 8px;
+}
+
+.ac-icon-small {
+    color: #3498db;
+    font-size: 14px;
+}
+
+.dc-icon-small {
+    color: #e74c3c;
+    font-size: 14px;
+    transform: rotate(45deg);
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 220px;
+    /* შეამცირე 260-დან */
+    max-width: 90vw;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: var(--transition);
+    padding: 10px 0;
+    list-style: none;
+    /* წერტილების მოშორება ჩამოსაშლელ სიაში */
+    margin: 0;
+}
+
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown:hover .dropdown-icon {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu li {
+    list-style: none;
+    /* დამატებითი დაზღვევა წერტილების წინააღმდეგ */
+    border-bottom: 1px solid #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown-menu li:last-child {
+    border-bottom: none;
+}
+
+/* Charger Options */
+.charger-option {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 20px !important;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    color: inherit;
+}
+
+.charger-option:hover {
+    background-color: #f8f9fa;
+}
+
+.charger-type {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 5px;
+}
+
+.ac-option {
+    color: #3498db;
+}
+
+.dc-option {
+    color: #e74c3c;
+}
+
+/* AC/DC Icons */
+.wave-small {
+    width: 20px;
+    height: 12px;
+    background:
+        radial-gradient(circle at 5px 6px, #3498db 1.5px, transparent 2px),
+        radial-gradient(circle at 15px 6px, #3498db 1.5px, transparent 2px);
+}
+
+.battery-small {
+    width: 20px;
+    height: 12px;
+    background: white;
+    border: 1px solid #e74c3c;
+    border-radius: 2px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.battery-small:after {
+    content: "";
+    position: absolute;
+    right: -3px;
+    top: 3px;
+    width: 1px;
+    height: 4px;
+    background: #e74c3c;
+}
+
+.pos-small,
+.neg-small {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: #e74c3c;
+    background: #2c3e50;
+}
+
+
+.charger-option small {
+    color: #7f8c8d;
+    font-size: 11px;
+    margin-left: 32px;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #ddd, transparent);
+    margin: 8px 0;
+}
+
+.all-products {
+    color: #2c3e50 !important;
+    font-weight: 500;
+    padding: 12px 20px !important;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.all-products i {
+    color: #3498db;
+}
+
+.all-products:hover {
+    background-color: #f8f9fa;
+    color: #3498db !important;
+}
+
+
+#languageSwitcherDesktop {
+    position: relative;
+    display: block;
+}
+
+.mobile-lang-switcher-item {
+    display: none;
+}
+
+.language-switcher {
+    position: relative;
+}
+
+.lang-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 15px;
+    color: #1e293b;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    white-space: nowrap;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    white-space: nowrap;
+    display: flex;
+    flex-shrink: 0;
+}
+
+.lang-btn:hover {
+    background-color: rgba(52, 152, 219, 0.2);
+    color: #3498db;
+}
+
+.dual-flags {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.flag-image {
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    object-fit: cover;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.current-flag {
+    width: 22px;
+    height: 16px;
+    z-index: 2;
+}
+
+.secondary-flag {
+    width: 18px;
+    height: 14px;
+    margin-left: -8px;
+    opacity: 0.8;
+    z-index: 1;
+}
+
+.lang-code {
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.lang-arrow {
+    font-size: 0.8rem !important;
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+    color: inherit;
+}
+
+.language-switcher.active .lang-arrow {
+    transform: rotate(180deg);
+}
+
+.lang-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 160px;
+    /* შეამცირე 200-დან 160-მდე */
+    max-width: 90vw;
+    /* დაზღვევა: ეკრანის 90%-ზე მეტი არასდროს იყოს */
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    overflow: hidden;
+    padding: 10px 0;
+    margin-top: 5px;
+}
+
+#languageSwitcherDesktop.active .lang-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.lang-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    transition: all 0.3s ease;
+    color: #333;
+    text-decoration: none;
+}
+
+.lang-option:hover {
+    background-color: rgba(52, 152, 219, 0.2);
+    color: #3498db;
+}
+
+
+
+.option-flag {
+    width: 20px;
+    height: 15px;
+    flex-shrink: 0;
+}
+
+.lang-name {
+    flex: 1;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+    display: none;
+    font-size: 1.5rem;
+    color: #1e293b;
+    cursor: pointer;
+    padding: 10px;
+    transition: all 0.3s ease;
+    background: none;
+    border: none;
+}
+
+.mobile-menu-btn.active {
+    color: #3498db;
+}
+
+
+/* Universal Button Styling */
+.cta-button,
+.certification-button,
+.aboutus-button,
+.gallery-button {
+    display: inline-block;
+    padding: 16px 32px;
+    background-color: var(--primary-blue);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+    border: none;
+    cursor: pointer;
+    max-width: 100%;
+    /* ღილაკი ეკრანზე დიდი არასდროს იქნება */
+    white-space: normal;
+    /* ტექსტი გადავა მეორე ხაზზე თუ არ დაეტევა */
+    text-align: center;
+    word-break: break-word;
+}
+
+.cta-button:hover,
+.certification-button:hover,
+.aboutus-button:hover,
+.gallery-button:hover {
+    background-color: #2980b9;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.5);
+
+}
+
+/* ================================================= */
+/* 5. NAVIGATION ARROWS                              */
+/* ================================================= */
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+    color: white;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: var(--transition);
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    text-decoration: none;
+}
+
+.prev {
+    left: 30px;
+}
+
+.next {
+    right: 30px;
+}
+
+@media (max-width: 900px) {
+
+    /* Hide Desktop Switcher */
+    #languageSwitcherDesktop {
+        display: none;
+    }
+
+    .mobile-lang-switcher-item {
+        display: block;
+        padding: 15px 0;
+        border-top: 2px solid #f1f5f9;
+        margin-top: 10px;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+        z-index: 1001;
+    }
+
+    /* Modern Slide-Down Menu */
+    .navbar {
+        position: fixed;
+        /* მყარად დგას ეკრანზე */
+        top: var(--header-height);
+        left: 0;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        transform: translateY(-110%);
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+        opacity: 0;
+        visibility: hidden;
+        padding-bottom: 40px;
+        z-index: 999;
+        display: block;
+        max-height: calc(100vh - var(--header-height));
+        overflow-y: auto;
+        /* შიდა სქროლვა თუ ბევრი ლინკია */
+    }
+
+    .navbar.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Menu Item Adjustments */
+    .nav-menu {
+        flex-direction: column;
+        padding: 0 20px;
+        gap: 0;
+    }
+
+    .nav-item {
+        width: 100%;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .nav-link {
+        padding: 18px 0;
+        font-size: 1.05rem;
+        justify-content: flex-start;
+    }
+
+    /* Mobile Language Switcher Styling */
+    .language-switcher.mobile-visible .lang-dropdown {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        display: flex;
+        gap: 10px;
+        padding: 10px 0;
+        background: transparent;
+    }
+
+    .language-switcher.mobile-visible .lang-option {
+        flex: 1;
+        justify-content: center;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 12px;
+        background: #f8fafc;
+    }
+
+    .language-switcher.mobile-visible .lang-option.active {
+        border-color: var(--primary-blue);
+        background: rgba(52, 152, 219, 0.05);
+    }
+
+    /* Submenu (Dropdown) on Mobile */
+    .dropdown-menu {
+        position: static;
+        display: none;
+        /* Toggle this via JS */
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        padding-left: 20px;
+        background: #fdfdfd;
+    }
+
+    .nav-item.open .dropdown-menu {
+        display: block;
+    }
+}
+
+/* Full-Screen Layout */
+.product-fullscreen-container {
+    width: 100%;
+}
+
+.product-row {
+    display: flex;
+    min-height: calc(100vh - var(--header-height));
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    scroll-snap-align: start;
+}
+
+/* Left Side: Image */
+.product-image-side {
+    flex: 1;
+    background-color: #f8fafc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+    position: relative;
+}
+
+.product-image-side img {
+    max-width: 80%;
+    max-height: 70vh;
+    object-fit: contain;
+    filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.1));
+}
+
+/* Right Side: Text */
+.product-text-side {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 80px;
+    background: white;
+}
+
+.text-content {
+    max-width: 500px;
+}
+
+.product-title {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: var(--dark-slate);
+}
+
+.product-description {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    margin-bottom: 30px;
+    line-height: 1.8;
+}
+
+/* Specs & Price */
+.specs-list {
+    list-style: none;
+    margin-bottom: 40px;
+}
+
+.specs-list li {
+    margin-bottom: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.specs-list i {
+    color: var(--primary-blue);
+    width: 20px;
+}
+
+.price-action {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.price {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--dark-slate);
+}
+
+.btn-primary {
+    padding: 18px 40px;
+    font-size: 1.1rem;
+    background: var(--dark-slate);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    width: fit-content;
+}
+
+.btn-primary:hover {
+    background: var(--primary-blue);
+    transform: scale(1.05);
+}
+
+/* Responsive for Tablets/Mobile */
+@media (max-width: 992px) {
+    .product-row {
+        flex-direction: column;
+    }
+
+    .product-image-side {
+        height: 50vh;
+    }
+
+    .product-text-side {
+        padding: 40px 20px;
+    }
+
+    .product-title {
+        font-size: 2rem;
+    }
+}
+
+/* Container Background */
+.product-fullscreen-container {
+    background-color: #f1f5f9;
+    /* Light grey background to see the gaps */
+    padding: 40px 0;
+    /* Padding at the very top and bottom of the page */
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    /* This creates the 60px space between every product */
+}
+
+.product-row {
+    display: flex;
+    min-height: 80vh;
+    /* Reduced height slightly so you can see the next one coming */
+    width: 90%;
+    /* Make it slightly narrower than the screen */
+    margin: 0 auto;
+    /* Center it */
+    background: white;
+    border-radius: 30px;
+    /* Rounded corners for a modern look */
+    overflow: hidden;
+    /* Ensures the image/text sides don't spill over the rounded corners */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+    scroll-snap-align: center;
+}
+
+/* Adjust the image side to feel more "contained" */
+.product-image-side {
+    flex: 1;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 992px) {
+    .product-fullscreen-container {
+        gap: 30px;
+        /* Smaller gap on mobile */
+    }
+
+    .product-row {
+        width: 95%;
+        min-height: auto;
+    }
+}
+
+/* Container & Spacing */
+.product-fullscreen-container {
+    background-color: #f1f5f9;
+    padding: 60px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    /* Space between products */
+}
+
+.product-row {
+    display: flex;
+    width: 90%;
+    max-width: 1400px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+    min-height: 85vh;
+}
+
+/* Left Side: Image Gallery */
+.product-image-side {
+    flex: 1.2;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+    position: relative;
+}
+
+.main-product-img {
+    max-width: 100%;
+    max-height: 60vh;
+    object-fit: contain;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-counter {
+    position: absolute;
+    top: 30px;
+    left: 40px;
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: #cbd5e1;
+}
+
+.gallery-counter .current {
+    color: var(--primary-blue);
+}
+
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    border: none;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: 0.3s;
+    z-index: 5;
+}
+
+.nav-arrow:hover {
+    background: var(--primary-blue);
+    color: white;
+}
+
+.prev {
+    left: 25px;
+}
+
+.next {
+    right: 25px;
+}
+
+/* Right Side: Info & Colors */
+.product-text-side {
+    flex: 0.8;
+    padding: 60px;
+    display: flex;
+    align-items: center;
+    border-left: 1px solid #f1f5f9;
+}
+
+.color-selector {
+    margin-bottom: 25px;
+}
+
+.color-selector p {
+    font-weight: 600;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+}
+
+.swatches {
+    display: flex;
+    gap: 15px;
+}
+
+.swatch {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s;
+    border: 2px solid transparent;
+}
+
+.swatch.active {
+    box-shadow: 0 0 0 2px white, 0 0 0 4px var(--primary-blue);
+    transform: scale(1.1);
+}
+
+.product-title {
+    font-size: 2.8rem;
+    margin-bottom: 15px;
+}
+
+.price {
+    font-size: 2.5rem;
+    font-weight: 800;
+    display: block;
+    margin-bottom: 15px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .product-row {
+        flex-direction: column;
+        width: 95%;
+    }
+
+    .product-text-side {
+        border-left: none;
+        border-top: 1px solid #f1f5f9;
+        padding: 40px;
+    }
+}
+
+/* Hide arrows and counter on mobile to focus on touch */
+@media (max-width: 768px) {
+
+    .nav-arrow,
+    .gallery-counter {
+        display: none !important;
+    }
+
+    .product-image-side {
+        padding: 20px;
+        touch-action: pan-y;
+        /* Allows vertical scrolling but captures horizontal swipes */
+    }
+
+    .main-product-img {
+        max-height: 40vh;
+        /* Adjust image size for mobile screens */
+    }
+}
+
+/* Zig-Zag layout: flips text/image side for even products */
+.product-row.reverse {
+    flex-direction: row-reverse;
+}
+
+.product-row.reverse .product-text-side {
+    border-left: none;
+    border-right: 1px solid #f1f5f9;
+}
+
+/* Ensure mobile stacking still works correctly */
+@media (max-width: 992px) {
+    .product-row.reverse {
+        flex-direction: column;
+        /* Stack image on top regardless of order on mobile */
+    }
+}
+
+/* Prevent the text container from overlapping the dots */
+.product-text-side {
+    position: relative;
+    z-index: 1;
+}
+
+/* Ensure the dots and arrows are always on top */
+.product-image-side {
+    position: relative;
+    z-index: 2;
+}
+
+.swatches {
+    display: flex;
+    gap: 12px;
+    position: relative;
+    z-index: 10;
+    /* High z-index to ensure clicks register */
+    pointer-events: auto;
+    /* Force clickability */
+}
+
+.swatch {
+    cursor: pointer !important;
+}
+
+/* KW Selector Styles */
+.kw-selector-container {
+    margin-bottom: 20px;
+}
+
+.kw-selector-container p {
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.kw-options {
+    display: flex;
+    gap: 10px;
+}
+
+.kw-btn {
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    background: transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    color: #444;
+}
+
+.kw-btn:hover {
+    border-color: #007bff;
+}
+
+.kw-btn.active {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+}
+
+/* Price Display Adjustments */
+.price-display {
+    display: flex;
+    flex-direction: column;
+}
+
+.starting-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: #888;
+    letter-spacing: 1px;
+    margin-bottom: -5px;
+}
+
+.price {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+/* ================================================= */
+/* 1. PRODUCT RESPONSIVE (Tablets & Mobile)          */
+/* ================================================= */
+@media (max-width: 992px) {
+
+    .product-row,
+    .product-row.reverse {
+        flex-direction: column !important;
+        width: 95% !important;
+        min-height: auto !important;
+        margin: 20px auto;
+    }
+
+    .product-image-side,
+    .product-text-side {
+        width: 100% !important;
+        padding: 40px 20px !important;
+        border: none !important;
+    }
+
+    .product-image-side {
+        height: 45vh;
+    }
+
+    .product-title {
+        font-size: 2rem !important;
+    }
+
+    .nav-arrow,
+    .gallery-counter {
+        display: none !important;
+    }
+}
+
+/* ================================================= */
+/* 2. MAIN MOBILE NAVIGATION (900px & Down)          */
+/* ================================================= */
+
+/* --- Responsive Layout for Mobile --- */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        /* Stack vertically on small screens */
+        gap: 20px;
+        text-align: center;
+        padding: 40px 20px;
+    }
+
+    .footer-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px 20px;
+    }
+}
+
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(calc(-100% / 2));
+    }
+
+    /* Assumes content is duplicated once */
+}
+
+@media (max-width: 900px) {
+
+    /* Hide Desktop Switcher */
+    #languageSwitcherDesktop {
+        display: none;
+    }
+
+    .mobile-lang-switcher-item {
+        display: block;
+        padding: 15px 0;
+        border-top: 2px solid #f1f5f9;
+        margin-top: 10px;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+        z-index: 1001;
+    }
+
+    /* Modern Slide-Down Menu */
+    .navbar {
+        position: fixed;
+        /* მყარად დგას ეკრანზე */
+        top: var(--header-height);
+        left: 0;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        transform: translateY(-110%);
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+        opacity: 0;
+        visibility: hidden;
+        padding-bottom: 40px;
+        z-index: 999;
+        display: block;
+        max-height: calc(100vh - var(--header-height));
+        overflow-y: auto;
+        /* შიდა სქროლვა თუ ბევრი ლინკია */
+    }
+
+    .navbar.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Menu Item Adjustments */
+    .nav-menu {
+        flex-direction: column;
+        padding: 0 20px;
+        gap: 0;
+    }
+
+    .nav-item {
+        width: 100%;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .nav-link {
+        padding: 18px 0;
+        font-size: 1.05rem;
+        justify-content: flex-start;
+    }
+
+    /* Mobile Language Switcher Styling */
+    .language-switcher.mobile-visible .lang-dropdown {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        display: flex;
+        gap: 10px;
+        padding: 10px 0;
+        background: transparent;
+    }
+
+    .language-switcher.mobile-visible .lang-option {
+        flex: 1;
+        justify-content: center;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 12px;
+        background: #f8fafc;
+    }
+
+    .language-switcher.mobile-visible .lang-option.active {
+        border-color: var(--primary-blue);
+        background: rgba(52, 152, 219, 0.05);
+    }
+
+    /* Submenu (Dropdown) on Mobile */
+    .dropdown-menu {
+        position: static;
+        display: none;
+        /* Toggle this via JS */
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        padding-left: 20px;
+        background: #fdfdfd;
+    }
+
+    .nav-item.open .dropdown-menu {
+        display: block;
+    }
+}
+
+.lang-option-btn.active {
+    background-color: var(--primary-blue);
+    color: white;
+    border-color: var(--primary-blue);
+}
+
+@media (max-width: 900px) {
+    .dropdown-menu {
+        min-width: 100% !important;
+        /* Forces it to stay inside the parent width */
+        width: 100%;
+        margin-left: 0;
+        box-sizing: border-box;
+    }
+
+    .nav-item {
+        width: 100%;
+        /* Prevents horizontal poking out */
+    }
+}

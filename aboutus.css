@@ -1,0 +1,1700 @@
+/* ================================================= */
+/* RESET & BASE STYLES                              */
+/* ================================================= */
+:root {
+    /* ძირითადი ფერები */
+    --primary-blue: #3498db;
+    --primary-red: #e74c3c;
+    --brand-blue: #3a86ff;
+    --brand-navy: #001e62;
+
+    /* ფონი და ტექსტი */
+    --bg-light: #f8fafc;
+    --slate-bg: #0f172a;
+    --slate-dark: #0f172a;
+    /* დუბლიკატია, მაგრამ ზოგან ასე გიწერია და იყოს */
+    --dark-slate: #1e293b;
+    --text-muted: #64748b;
+    --text-slate: #94a3b8;
+    --text-light: #f1f5f9;
+    --white: #ffffff;
+
+    /* ზომები და ეფექტები */
+    --header-height: 80px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* დაამატე ეს ორი ხაზი */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+html {
+    /* Allows smooth scrolling for anchor links */
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--dark-slate);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+
+    /* --- THE FIX --- */
+    /* 1. Use 'clip' instead of 'hidden' if supported. 
+       It prevents horizontal scroll WITHOUT breaking 'sticky' */
+    overflow-x: clip;
+
+    /* 2. Remove 'overflow-y: auto' from body. 
+       Let the 'html' handle the natural window scroll. */
+
+}
+
+/* Fallback for older browsers that don't support 'clip' */
+@supports not (overflow-x: clip) {
+    body {
+        overflow-x: hidden;
+    }
+}
+
+h1,
+h2,
+h3,
+h4 {
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    /* შეამცირე 20-დან 15-მდე */
+    width: 100%;
+    /* დაამატე ეს */
+}
+
+/* ================================================= */
+/* HEADER & NAVIGATION                              */
+/* ================================================= */
+.header {
+    background-color: white;
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: var(--header-height);
+    transition: transform 0.3s ease-in-out, background-color 0.3s ease;
+    will-change: transform;
+}
+
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.header-hidden {
+    transform: translateY(-100%);
+    /* ჰედერი ავა ზემოთ და დაიმალება */
+}
+
+/* Logo */
+.logo-img {
+    height: 40px;
+    transition: var(--transition);
+}
+
+.logo a:hover .logo-img {
+    transform: scale(1.05);
+}
+
+/* Navigation */
+.navbar {
+    display: flex;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    /* წერტილების მოშორება მთავარ მენიუში */
+    margin: 0;
+    padding: 0;
+    gap: 5px;
+}
+
+.nav-item {
+    position: relative;
+    list-style: none;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    /* შეამცირე 8-დან 6-მდე */
+    padding: 8px 10px;
+    /* შეამცირე 10px 15px-დან */
+    color: var(--dark-slate);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+    border-radius: 6px;
+}
+
+.nav-link:hover {
+    background-color: rgba(52, 152, 219, 0.08);
+    color: var(--primary-blue);
+}
+
+.nav-link i {
+    font-size: 1.1rem;
+}
+
+.dropdown-icon {
+    font-size: 0.8rem !important;
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+}
+
+/* Charger Icons in Nav */
+.charger-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-right: 8px;
+}
+
+.ac-icon-small {
+    color: #3498db;
+    font-size: 14px;
+}
+
+.dc-icon-small {
+    color: #e74c3c;
+    font-size: 14px;
+    transform: rotate(45deg);
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 220px;
+    /* შეამცირე 260-დან */
+    max-width: 90vw;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: var(--transition);
+    padding: 10px 0;
+    list-style: none;
+    /* წერტილების მოშორება ჩამოსაშლელ სიაში */
+    margin: 0;
+}
+
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown:hover .dropdown-icon {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu li {
+    list-style: none;
+    /* დამატებითი დაზღვევა წერტილების წინააღმდეგ */
+    border-bottom: 1px solid #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown-menu li:last-child {
+    border-bottom: none;
+}
+
+/* Charger Options */
+.charger-option {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 20px !important;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    color: inherit;
+}
+
+.charger-option:hover {
+    background-color: #f8f9fa;
+}
+
+.charger-type {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 5px;
+}
+
+.ac-option {
+    color: #3498db;
+}
+
+.dc-option {
+    color: #e74c3c;
+}
+
+/* AC/DC Icons */
+.wave-small {
+    width: 20px;
+    height: 12px;
+    background:
+        radial-gradient(circle at 5px 6px, #3498db 1.5px, transparent 2px),
+        radial-gradient(circle at 15px 6px, #3498db 1.5px, transparent 2px);
+}
+
+.battery-small {
+    width: 20px;
+    height: 12px;
+    background: white;
+    border: 1px solid #e74c3c;
+    border-radius: 2px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.battery-small:after {
+    content: "";
+    position: absolute;
+    right: -3px;
+    top: 3px;
+    width: 1px;
+    height: 4px;
+    background: #e74c3c;
+}
+
+.pos-small,
+.neg-small {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: #e74c3c;
+    background: #2c3e50;
+}
+
+
+.charger-option small {
+    color: #7f8c8d;
+    font-size: 11px;
+    margin-left: 32px;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #ddd, transparent);
+    margin: 8px 0;
+}
+
+.all-products {
+    color: #2c3e50 !important;
+    font-weight: 500;
+    padding: 12px 20px !important;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+}
+
+.all-products i {
+    color: #3498db;
+}
+
+.all-products:hover {
+    background-color: #f8f9fa;
+    color: #3498db !important;
+}
+
+
+#languageSwitcherDesktop {
+    position: relative;
+    display: block;
+}
+
+.mobile-lang-switcher-item {
+    display: none;
+}
+
+.language-switcher {
+    position: relative;
+}
+
+.lang-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 15px;
+    color: #1e293b;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+    white-space: nowrap;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    white-space: nowrap;
+    display: flex;
+    flex-shrink: 0;
+}
+
+.lang-btn:hover {
+    background-color: rgba(52, 152, 219, 0.2);
+    color: #3498db;
+}
+
+.dual-flags {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.flag-image {
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    object-fit: cover;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.current-flag {
+    width: 22px;
+    height: 16px;
+    z-index: 2;
+}
+
+.secondary-flag {
+    width: 18px;
+    height: 14px;
+    margin-left: -8px;
+    opacity: 0.8;
+    z-index: 1;
+}
+
+.lang-code {
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.lang-arrow {
+    font-size: 0.8rem !important;
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+    color: inherit;
+}
+
+.language-switcher.active .lang-arrow {
+    transform: rotate(180deg);
+}
+
+.lang-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 160px;
+    /* შეამცირე 200-დან 160-მდე */
+    max-width: 90vw;
+    /* დაზღვევა: ეკრანის 90%-ზე მეტი არასდროს იყოს */
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    overflow: hidden;
+    padding: 10px 0;
+    margin-top: 5px;
+}
+
+#languageSwitcherDesktop.active .lang-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.lang-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    transition: all 0.3s ease;
+    color: #333;
+    text-decoration: none;
+}
+
+.lang-option:hover {
+    background-color: rgba(52, 152, 219, 0.2);
+    color: #3498db;
+}
+
+
+
+.option-flag {
+    width: 20px;
+    height: 15px;
+    flex-shrink: 0;
+}
+
+.lang-name {
+    flex: 1;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+    display: none;
+    font-size: 1.5rem;
+    color: #1e293b;
+    cursor: pointer;
+    padding: 10px;
+    transition: all 0.3s ease;
+    background: none;
+    border: none;
+}
+
+.mobile-menu-btn.active {
+    color: #3498db;
+}
+
+
+/* Universal Button Styling */
+.cta-button,
+.certification-button,
+.aboutus-button,
+.gallery-button {
+    display: inline-block;
+    padding: 16px 32px;
+    background-color: var(--primary-blue);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+    border: none;
+    cursor: pointer;
+    max-width: 100%;
+    /* ღილაკი ეკრანზე დიდი არასდროს იქნება */
+    white-space: normal;
+    /* ტექსტი გადავა მეორე ხაზზე თუ არ დაეტევა */
+    text-align: center;
+    word-break: break-word;
+}
+
+.cta-button:hover,
+.certification-button:hover,
+.aboutus-button:hover,
+.gallery-button:hover {
+    background-color: #2980b9;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.5);
+
+}
+
+/* ================================================= */
+/* 5. NAVIGATION ARROWS                              */
+/* ================================================= */
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+    color: white;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: var(--transition);
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    text-decoration: none;
+}
+
+.prev {
+    left: 30px;
+}
+
+.next {
+    right: 30px;
+}
+
+/* ================================================= */
+/* ZIGZAG ABOUT SECTION                              */
+/* ================================================= */
+/* --- SECTION WRAPPER --- */
+/* --- SECTION WRAPPER --- */
+/* --- SECTION WRAPPER --- */
+.firstAbout {
+    /* clamp() prevents layout jumps by scaling smoothly between mobile and desktop */
+    padding: clamp(40px, 6vw, 80px) 0;
+    background-color: var(--white);
+    /* contain: content is a massive performance win; it tells the browser 
+       not to worry about this section when rendering the rest of the page. */
+    contain: content;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- THE FLEX ROW --- */
+.zigzag-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    /* clamp-ის ნაცვლად უბრალო gap უფრო სწრაფია */
+    margin-bottom: 60px;
+    will-change: transform;
+    /* ეუბნება GPU-ს რომ მოემზადოს */
+}
+
+.zigzag-row.reverse {
+    flex-direction: row-reverse;
+}
+
+/* --- THE IMAGE CONTAINER --- */
+.zigzag-image {
+    width: 100%;
+    /* მობილურისთვის/დეფოლტად */
+    max-width: 600px;
+    flex: 1;
+}
+
+/* --- THE TEXT CONTAINER --- */
+.zigzag-text {
+    flex: 0 1 40%;
+}
+
+.zigzag-row.reverse .about-img {
+    max-height: 450px;
+    /* Limits the height of square/tall images so they don't eat the page */
+    object-fit: contain;
+    /* Keeps documents/logos from being cropped */
+    background-color: #ffffff;
+}
+
+/* --- THE IMAGE (Lighthouse Performance) --- */
+.about-img {
+    width: 100%;
+    height: auto;
+    /* Let the height be natural based on the file */
+
+    /* Removed fixed aspect-ratio to prevent side-gaps */
+
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 30, 98, 0.08);
+    display: block;
+
+    /* Performance: Hardware accelerated transitions */
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- TEXT STYLES --- */
+.about-title {
+    /* Fluid font-size scales perfectly without media queries */
+    font-size: clamp(1.8rem, 4vw, 2.2rem);
+    color: var(--brand-navy);
+    margin-bottom: 15px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.about-text {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* --- მეორე სექციის სტილები --- */
+.partner-info-section {
+    padding: 80px 0;
+    background-color: #f8fafc;
+    /* განსხვავებული ფონი */
+}
+
+/* ვიყენებთ Flex-ს, მაგრამ ახალი კლასით */
+.partner-flex-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+/* ტექსტის ნაწილი */
+.partner-content-text {
+    flex: 1;
+}
+
+.partner-main-title {
+    font-size: 2.5rem;
+    color: #002d72;
+    margin-bottom: 20px;
+    font-weight: 800;
+}
+
+/* სურათის ნაწილი - აქ შეგიძლია დიზაინი შეცვალო */
+.partner-content-media {
+    flex: 1;
+    position: relative;
+}
+
+.partner-custom-img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    /* შევცვალოთ უფრო მსუბუქი ეფექტით */
+    box-shadow: 10px 10px 0px var(--brand-blue);
+    transform: translateZ(0);
+    /* Hardware Acceleration */
+}
+
+/* პატარა ბეიჯები */
+.cert-badges-row {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.badge-item {
+    background: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    font-size: 0.9rem;
+}
+
+
+/* --- Milestone სექციის ზოგადი სტილი --- */
+
+.milestone-section {
+    padding: clamp(60px, 10vw, 100px) 0;
+    background-color: var(--white);
+    overflow: hidden;
+    /* რომ ანიმაციებმა გვერდზე არ გაასწროს */
+}
+
+.milestone-main-title {
+    text-align: center;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    color: var(--brand-navy);
+    margin-bottom: clamp(60px, 8vw, 100px);
+    font-weight: 800;
+}
+
+/* Timeline კონტეინერი */
+.timeline-wrapper {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+/* ცენტრალური ვერტიკალური ხაზი */
+.timeline-line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, transparent, var(--brand-blue, #0056b3) 15%, var(--brand-blue, #0056b3) 85%, transparent);
+    transform: translateX(-50%);
+}
+
+/* თითოეული პუნქტის სტილი */
+.timeline-item {
+    position: relative;
+    width: 100%;
+    margin-bottom: 60px;
+    display: flex;
+    justify-content: center;
+    /* ცენტრირება მობილურისთვის მოსამზადებლად */
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timeline-item.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* მარცხენა და მარჯვენა ელემენტების განლაგება */
+.timeline-item.left {
+    justify-content: flex-start;
+    padding-right: 50%;
+}
+
+.timeline-item.right {
+    justify-content: flex-end;
+    padding-left: 50%;
+}
+
+/* წერტილი ხაზზე */
+.timeline-dot {
+    position: absolute;
+    left: 50%;
+    top: 25px;
+    width: 18px;
+    height: 18px;
+    background: var(--brand-blue, #0056b3);
+    border: 4px solid var(--white);
+    border-radius: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.2);
+}
+
+/* ტექსტის ბარათი */
+.timeline-content {
+    position: relative;
+    width: 90%;
+    padding: 30px;
+    background: #f8fafc;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timeline-item.left .timeline-content {
+    margin-right: 40px;
+    text-align: right;
+}
+
+.timeline-item.right .timeline-content {
+    margin-left: 40px;
+    text-align: left;
+}
+
+/* Hover ეფექტი */
+.timeline-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 30, 98, 0.1);
+}
+
+.milestone-year {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--brand-blue, #0056b3);
+    margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .timeline-line {
+        left: 30px;
+        /* ხაზი გადავიტანოთ გვერდზე */
+    }
+
+    .timeline-dot {
+        left: 30px;
+        /* წერტილებიც ხაზს გავაყოლოთ */
+    }
+
+    .timeline-item.left,
+    .timeline-item.right {
+        justify-content: flex-start;
+        padding-left: 60px;
+        /* ადგილი ხაზისთვის */
+        padding-right: 0;
+        text-align: left !important;
+    }
+
+    .timeline-content {
+        width: 100%;
+        margin: 0 !important;
+    }
+}
+
+/* Certifications Section Styles */
+/* 1. Main Section Layout */
+/* ==========================================================================
+   1. Certifications Section Layout
+   ========================================================================== */
+.cert-showcase {
+    padding: 80px 0;
+    /* Slightly reduced padding for a tighter look */
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #d0d4dd;
+    color: black;
+}
+
+.cert-container {
+    display: flex;
+    width: 95%;
+    max-width: 1400px;
+    align-items: center;
+    gap: 60px;
+    /* Reduced from 100px to help at 200% zoom */
+    flex-wrap: wrap;
+    /* CRITICAL: Allows items to stack when zooming */
+    justify-content: center;
+}
+
+/* --- Left Side: Text Content (MADE SMALLER) --- */
+.cert-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Centers text vertically against the 500px image */
+    padding-right: 50px;
+    /* Breathing room between text and slider */
+}
+
+
+.cert-info .milestone-main-title {
+    font-size: 2.8rem;
+    font-weight: 800;
+    line-height: 1.1;
+    color: #1a1a1a;
+    margin-bottom: 30px;
+    /* Increased for breathing room */
+    letter-spacing: -0.02em;
+    position: relative;
+    text-align: left;
+}
+
+.cert-description {
+    font-size: 1rem;
+    /* Reduced from 1.15rem */
+    line-height: 1.6;
+    color: #666;
+    /* Slightly lighter for a modern look */
+    margin: 15px 0;
+}
+
+.cert-list li {
+    margin-bottom: 15px;
+    /* Better spacing for readability */
+    font-size: 1rem;
+    display: flex;
+    align-items: flex-start;
+    /* Keeps icon aligned with the first line of text */
+    gap: 12px;
+    text-align: left;
+}
+
+.cert-list li i {
+    color: #0047FF;
+    margin-top: 4px;
+    /* Optical alignment */
+}
+
+/* ==========================================================================
+   2. Slider Visuals (MADE BIGGER)
+   ========================================================================== */
+.cert-visual {
+    flex: 1.2;
+    display: flex;
+    justify-content: center;
+    min-width: 0;
+    /* ADD THIS LINE: Ensures the dots (which are absolute) stay inside this area */
+    position: relative;
+
+}
+
+.slider-wrapper {
+    height: auto;
+    /* Let the content determine height */
+    max-width: 100%;
+    /* Ensure it never overflows its parent */
+}
+
+.cert-slider {
+    display: flex;
+    overflow-x: auto;
+    /* Required for native mobile swiping */
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    /* Momentum scrolling for iOS */
+    touch-action: pan-x;
+    /* Crucial: Allows horizontal swiping but vertical page scrolling */
+}
+
+.cert-slider:active {
+    cursor: grabbing;
+}
+
+.cert-slider::-webkit-scrollbar {
+    display: none;
+}
+
+.slide {
+    width: 100%;
+    height: auto;
+    /* Remove the fixed 500px height */
+    aspect-ratio: 16 / 9;
+    /* Maintains a professional look regardless of zoom */
+    object-fit: cover;
+}
+
+/* --- THE DESKTOP FIX --- */
+.cert-slider img {
+    -webkit-user-drag: none;
+    user-drag: none;
+    /* Change 'none' to 'auto' so the lightbox can detect clicks */
+    pointer-events: auto;
+    cursor: zoom-in;
+}
+
+/* ==========================================================================
+   3. Navigation Arrows
+   ========================================================================== */
+.slide-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    /* Lighter background for a cleaner look */
+    color: #333;
+    /* Darker arrows */
+    border: none;
+    font-size: 1.8rem;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    /* Circle arrows look more modern */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.slide-arrow:hover {
+    background: #ffffff;
+    transform: translateY(-50%) scale(1.1);
+}
+
+#slide-arrow-prev {
+    left: 20px;
+}
+
+#slide-arrow-next {
+    right: 20px;
+}
+
+/* Styling for Strong Tags in the Cert Section */
+.cert-info strong {
+    color: #0047FF;
+    /* Matches your icon color */
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    position: relative;
+    display: inline-block;
+}
+
+/* Optional: Subtle hover effect for the brand name */
+.cert-info strong:hover {
+    color: #0036cc;
+    transition: color 0.3s ease;
+}
+
+/* Styling specifically for the list headers (CE & TUV, ISO, etc.) */
+.cert-list li strong {
+    color: #222;
+    /* Keeps the labels dark for readability */
+    font-weight: 600;
+    margin-right: 4px;
+    /* Space between title and description */
+}
+
+.slider-dots {
+    position: absolute;
+    bottom: 25px;
+    /* Adjust based on your slider height */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 15;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.2);
+    /* Subtle dots */
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    background: #0047FF;
+    /* Your brand blue */
+    width: 24px;
+    /* Pill effect */
+    border-radius: 10px;
+}
+
+.slide {
+    flex: 0 0 100%;
+    width: 100%;
+    /* Standardized height for desktop */
+    height: 500px;
+    /* USE 'cover' to fill the space. 
+       Use 'contain' only if you need to see the very edges of the paper. */
+    object-fit: cover;
+    object-position: center;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    display: block;
+    backface-visibility: hidden;
+    /* This removes any tiny gaps between images */
+    outline: none;
+}
+
+/* Lightbox Container */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    /* Darker for better focus */
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    cursor: zoom-out;
+    padding: 20px;
+    /* Prevents image touching screen edges */
+}
+
+.lightbox.active {
+    display: flex;
+    opacity: 1;
+}
+
+/* The Expanded Image */
+.lightbox-content {
+    max-width: 90%;
+    max-height: 85%;
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+}
+
+.lightbox.active .lightbox-content {
+    transform: scale(1);
+}
+
+/* Close Button */
+.close-lightbox {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Update slider image cursor */
+.cert-slider img {
+    cursor: zoom-in !important;
+    pointer-events: auto !important;
+    /* Allow clicking */
+}
+
+/* ==========================================================================
+   4. Media Queries
+   ========================================================================== */
+@media (max-width: 1200px) {
+    .cert-container {
+        gap: 60px;
+        width: 95%;
+    }
+
+    .cert-info .milestone-main-title {
+        font-size: 2.4rem;
+    }
+}
+
+/* 2. პლანშეტები (769px - 1024px) */
+@media (max-width: 1024px) {
+    .cert-container {
+        gap: 40px;
+    }
+
+    .cert-info {
+        padding-right: 20px;
+    }
+
+    .slide {
+        height: 400px;
+        /* სიმაღლე ოდნავ მცირდება */
+    }
+}
+
+/* 3. მობილურები და პორტრეტული რეჟიმი (481px - 768px) */
+@media (max-width: 768px) {
+    .cert-showcase {
+        padding: 50px 0;
+    }
+
+    .cert-container {
+        flex-direction: column;
+        /* ტექსტი ადის ზემოთ */
+        text-align: center;
+        gap: 35px;
+    }
+
+    .cert-info {
+        padding-right: 0;
+        align-items: center;
+        /* ტექსტის ცენტრირება */
+    }
+
+    .cert-info .milestone-main-title {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    .cert-description {
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .cert-list {
+        display: inline-block;
+        text-align: left;
+        /* სია რჩება მარცხნივ სწორებაზე, მაგრამ კონტეინერი ცენტრშია */
+    }
+
+    .cert-link-wrapper {
+        text-align: center;
+        margin-top: 20px;
+        width: 100%;
+    }
+
+    .view-more-certs {
+        justify-content: center;
+        /* ლინკიც ცენტრდება */
+        font-size: 1rem;
+    }
+
+    .slide {
+        height: auto;
+        aspect-ratio: 4 / 3;
+        /* მობილურზე სერტიფიკატის ფორმა */
+    }
+
+    .slide-arrow {
+        width: 35px;
+        height: 35px;
+        font-size: 1.2rem;
+    }
+
+    #slide-arrow-prev {
+        left: 5px;
+    }
+
+    #slide-arrow-next {
+        right: 5px;
+    }
+}
+
+@media (max-width: 768px) {
+    .slide {
+        /* On mobile, let the height be determined by aspect ratio */
+        height: auto;
+        aspect-ratio: 1 / 1.3;
+        /* Certificate/Portrait shape */
+    }
+
+    .slider-wrapper {
+        height: auto;
+        /* Allow the wrapper to shrink with the image */
+    }
+}
+
+/* 4. პატარა მობილურები (max-width: 480px) */
+@media (max-width: 480px) {
+    .cert-showcase {
+        padding: 40px 0;
+    }
+
+    .cert-info .milestone-main-title {
+        font-size: 1.6rem;
+    }
+
+    .cert-description {
+        font-size: 0.95rem;
+    }
+
+    .cert-list li {
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+    }
+
+    .slide {
+        height: 250px;
+        /* ყველაზე პატარა ზომა */
+    }
+
+    .view-more-certs {
+        font-size: 0.85rem;
+        flex-direction: column;
+        /* ტექსტი და ლინკი ერთმანეთის ქვეშ, რომ არ დაეტეტოს */
+        gap: 4px;
+    }
+}
+
+.bigbannerofCertification {
+    width: 100%;
+    /* სურათი ყოველთვის შეინარჩუნებს თავის ფორმას */
+    height: auto;
+    position: relative;
+    background-color: #fff;
+    line-height: 0;
+    /* აქრობს თეთრ ხაზს სურათის ქვეშ */
+}
+
+.certification-background {
+    width: 100%;
+    height: 100%;
+}
+
+.certification-background img {
+    /* სურათი ყოველთვის იკავებს ეკრანის 100%-ს სიგანეში */
+    width: 100%;
+    height: auto;
+
+    /* 'contain' ნიშნავს, რომ სურათი მუდამ მთლიანი იქნება */
+    object-fit: contain;
+
+    /* აუქმებს ნებისმიერ გვერდზე გაწევას - სურათი მუდამ ცენტრშია და მთლიანი */
+    object-position: center;
+
+    display: block;
+}
+
+.slide-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    border: none;
+    font-size: 1.4rem;
+    /* უფრო ნაზი ისარი */
+    width: 40px;
+    /* დაპატარავებული ზომა */
+    height: 40px;
+    /* დაპატარავებული ზომა */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.slide-arrow:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.slide-arrow:hover {
+    background: #0047FF !important;
+    color: #ffffff !important;
+}
+
+.slide-arrow:active {
+    transform: translateY(-50%) scale(0.9);
+}
+
+/* პოზიციონირება კიდეებიდან */
+#slide-arrow-prev {
+    left: 12px;
+}
+
+#slide-arrow-next {
+    right: 12px;
+}
+
+.cert-link-wrapper {
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    /* გამოყოფს სიისგან */
+}
+
+.view-more-certs {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #666;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.view-more-certs strong {
+    color: #0047FF !important;
+    /* შენი ბრენდის ლურჯი */
+    text-decoration: underline;
+}
+
+.view-more-certs i {
+    font-size: 0.8rem;
+    color: #0047FF;
+}
+
+.view-more-certs:hover {
+    transform: translateX(5px);
+    /* პატარა ანიმაცია ჰოვერზე */
+    color: #1a1a1a;
+}
+
+
+
+/* მობილურზე რომ საერთოდ არ შეუშალოს ხელი სურათის დათვალიერებას */
+@media (max-width: 768px) {
+    .slide-arrow {
+        width: 35px;
+        height: 35px;
+        font-size: 1.2rem;
+    }
+}
+
+/* --- მედია ქუერები სიზუსტისთვის --- */
+
+/* დიდი ეკრანები (მაქსიმალური სიმაღლის შეზღუდვა, რომ ძალიან არ გაიზარდოს) */
+@media (min-width: 1400px) {
+    .bigbannerofCertification img {
+        max-height: 600px;
+        object-fit: cover;
+        /* დიდ ეკრანზე სილამაზისთვის */
+    }
+}
+
+/* პლანშეტები */
+@media (max-width: 1024px) {
+    .bigbannerofCertification {
+        /* აქ არაფრის შეცვლა არ გვჭირდება, height: auto თავისით იზამს ყველაფერს */
+    }
+}
+
+/* მობილურები */
+@media (max-width: 768px) {
+
+    /* თუ გინდა, რომ მობილურზე სურათი უფრო "დიდი" გამოჩნდეს, 
+       შეგვიძლია padding დავუმატოთ ან სიმაღლე დავარეგულიროთ */
+    .bigbannerofCertification {
+        min-height: auto;
+    }
+}
+
+/* ძალიან პატარა ეკრანები */
+@media (max-width: 480px) {
+    .bigbannerofCertification img {
+        /* სურათი აქაც მთლიანი დარჩება და უბრალოდ დაპატარავდება ეკრანთან ერთად */
+    }
+}
+
+/* Extra Small Phones */
+@media (max-width: 480px) {
+    .milestone-main-title {
+        font-size: 1.6rem;
+    }
+
+    .cert-list li {
+        font-size: 0.9rem;
+    }
+
+    .slide {
+        height: 250px;
+    }
+
+    .slide-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1.4rem;
+    }
+}
+
+/* ================================================= */
+/* CLEAN MEDIA QUERIES (Reduced quantity)           */
+/* ================================================= */
+
+/* We only need one main breakpoint because clamp() handles the rest */
+@media (max-width: 900px) {
+
+    .zigzag-row,
+    .zigzag-row.reverse {
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 30px;
+    }
+
+    .zigzag-image,
+    .zigzag-text {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .about-img {
+        max-height: 350px;
+        /* Shorter for mobile screens */
+    }
+}
+
+@media (max-width: 900px) {
+
+    /* Hide Desktop Switcher */
+    #languageSwitcherDesktop {
+        display: none;
+    }
+
+    .mobile-lang-switcher-item {
+        display: block;
+        padding: 15px 0;
+        border-top: 2px solid #f1f5f9;
+        margin-top: 10px;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+        z-index: 1001;
+    }
+
+    /* Modern Slide-Down Menu */
+    .navbar {
+        position: fixed;
+        /* მყარად დგას ეკრანზე */
+        top: var(--header-height);
+        left: 0;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        transform: translateY(-110%);
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+        opacity: 0;
+        visibility: hidden;
+        padding-bottom: 40px;
+        z-index: 999;
+        display: block;
+        max-height: calc(100vh - var(--header-height));
+        overflow-y: auto;
+        /* შიდა სქროლვა თუ ბევრი ლინკია */
+    }
+
+    .navbar.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Menu Item Adjustments */
+    .nav-menu {
+        flex-direction: column;
+        padding: 0 20px;
+        gap: 0;
+    }
+
+    .nav-item {
+        width: 100%;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .nav-link {
+        padding: 18px 0;
+        font-size: 1.05rem;
+        justify-content: flex-start;
+    }
+
+    /* Mobile Language Switcher Styling */
+    .language-switcher.mobile-visible .lang-dropdown {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        display: flex;
+        gap: 10px;
+        padding: 10px 0;
+        background: transparent;
+    }
+
+    .language-switcher.mobile-visible .lang-option {
+        flex: 1;
+        justify-content: center;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 12px;
+        background: #f8fafc;
+    }
+
+    .language-switcher.mobile-visible .lang-option.active {
+        border-color: var(--primary-blue);
+        background: rgba(52, 152, 219, 0.05);
+    }
+
+    /* Submenu (Dropdown) on Mobile */
+    .dropdown-menu {
+        position: static;
+        display: none;
+        /* Toggle this via JS */
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        padding-left: 20px;
+        background: #fdfdfd;
+    }
+
+    .nav-item.open .dropdown-menu {
+        display: block;
+    }
+}
+
+@media (max-width: 768px) {
+    .zigzag-row {
+        flex-direction: column !important;
+        text-align: center;
+    }
+}
+
+.minimal-footer {
+    /* Updated to the deep navy/black seen in your app section */
+    background-color: #0a0f18;
+    padding: 40px 0;
+    /* Slightly more breathing room */
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    transition: opacity 0.3s ease-in-out;
+    /* Removed 0.8 opacity to keep the colors vibrant and accessible */
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+}
+
+/* Base style for all text and links */
+.footer-copy span,
+.footer-nav a,
+.footer-social a {
+    /* Using a bright white-gray for better readability against dark backgrounds */
+    color: #cbd5e1;
+    font-size: 13px;
+    /* Slightly smaller for that 'minimal' professional look */
+    text-decoration: none;
+    transition: all 0.2s ease;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+/* Horizontal Nav specific spacing */
+.footer-nav {
+    display: flex;
+    gap: 32px;
+}
+
+/* Hover Effect - Matches the 'Home' text/gold feel from the app logo */
+.footer-nav a:hover,
+.footer-social a:hover {
+    color: #ffffff;
+    /* Optional: add a subtle glow or underline */
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+/* Social Icon spacing */
+.footer-social {
+    display: flex;
+    gap: 24px;
+}
+
+.footer-social a {
+    font-size: 16px;
+    color: #94a3b8;
+    /* Muted icons */
+}
+
+.footer-social a:hover {
+    color: #ffffff;
+    /* Bright on hover */
+}
+
+/* --- Responsive Layout for Mobile --- */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        gap: 25px;
+        text-align: center;
+        padding: 40px 20px;
+    }
+
+    .footer-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px 25px;
+    }
+}

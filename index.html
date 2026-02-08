@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="pageTitle">AC & DC Chargers | Premium EV Solutions</title>
+    <link rel="stylesheet" href="index.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/mymobile.png" alt="Logo" class="logo-img" loading="eager" fetchpriority="high">
+                </a>
+            </div>
+
+            <nav class="navbar" id="mobileNavMenu">
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">
+                            <i class="fas fa-home"></i>
+                            <span data-i18n="home">Home</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="product.html" class="nav-link dropdown-toggle">
+                            <div class="charger-icon">
+                                <i class="fas fa-bolt ac-icon-small"></i>
+                                <i class="fas fa-plug dc-icon-small"></i>
+                            </div>
+                            <span data-i18n="chargers">Chargers</span>
+                            <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="product.html" class="charger-option">
+                                    <div class="charger-type ac-option">
+                                        <div class="wave-small"></div>
+                                        <span data-i18n="acChargers">AC Chargers</span>
+                                    </div>
+                                    <small data-i18n="acDesc">AC: portable, wall-mounted</small>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="product.html" class="charger-option">
+                                    <div class="charger-type dc-option">
+                                        <div class="battery-small">
+                                            <div class="pos-small"></div>
+                                            <div class="neg-small"></div>
+                                        </div>
+                                        <span data-i18n="dcChargers">DC Chargers</span>
+                                    </div>
+                                    <small data-i18n="dcDesc">Direct Current Fast Charging</small>
+                                </a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li>
+                                <a href="product.html" class="all-products">
+                                    <i class="fas fa-bolt-lightning"></i>
+                                    <span data-i18n="allProducts">All Charging Products</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="aboutus.html" class="nav-link dropdown-toggle">
+                            <i class="fas fa-info-circle"></i>
+                            <span data-i18n="about">About Us</span>
+                            <i class="fas fa-chevron-down dropdown-icon"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="aboutus.html" class="charger-option">
+                                    <i class="fas fa-users"></i>
+                                    <span data-i18n="whoWeAre">Who We Are</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="aboutus.html" class="charger-option">
+                                    <i class="fas fa-award"></i>
+                                    <span data-i18n="certification">Certification</span>
+                                </a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li>
+                                <a href="#" class="all-products" id="openContactModal">
+                                    <i class="fas fa-envelope"></i>
+                                    <span data-i18n="contact">Contact Us</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-images"></i>
+                            <span data-i18n="gallery">Gallery</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item mobile-lang-switcher-item">
+                        <div class="language-switcher mobile-visible">
+                            <div class="lang-dropdown">
+                                <button class="lang-option" data-lang="en">
+                                    <img src="https://flagcdn.com/w20/us.png" class="flag-image option-flag" alt="EN">
+                                    <span class="lang-name">English</span>
+                                </button>
+                                <button class="lang-option" data-lang="ka">
+                                    <img src="https://flagcdn.com/w20/ge.png" class="flag-image option-flag" alt="KA">
+                                    <span class="lang-name">ქართული</span>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="header-right-group">
+                <div class="language-switcher" id="languageSwitcherDesktop">
+                    <button class="lang-btn" id="langToggle">
+                        <div class="dual-flags">
+                            <img src="https://flagcdn.com/w20/us.png" class="flag-image current-flag" alt="EN">
+                            <img src="https://flagcdn.com/w20/ge.png" class="flag-image secondary-flag" alt="KA">
+                        </div>
+                        <span class="lang-code">EN</span>
+                        <i class="fas fa-chevron-down lang-arrow"></i>
+                    </button>
+                    <div class="lang-dropdown" id="langDropdownDesktop">
+                        <button class="lang-option" data-lang="en">
+                            <img src="https://flagcdn.com/w20/us.png" class="flag-image option-flag" alt="EN">
+                            <span class="lang-name">English</span>
+                            <span class="lang-code-option">EN</span>
+                        </button>
+                        <button class="lang-option" data-lang="ka">
+                            <img src="https://flagcdn.com/w20/ge.png" class="flag-image option-flag" alt="KA">
+                            <span class="lang-name">ქართული</span>
+                            <span class="lang-code-option">KA</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mobile-menu-btn" id="mobileMenuToggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="contactModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span id="closeContactModal" class="close-btn">&times;</span>
+            <h2 data-i18n="contact">Contact Us</h2>
+            <form id="contactForm">
+                <input type="text" data-i18n="contactName" placeholder="Name" required>
+                <input type="email" data-i18n="contactEmail" placeholder="Email" required>
+                <textarea data-i18n="contactMsg" placeholder="How can we help?"></textarea>
+                <button type="submit" class="main-button" data-i18n="contactBtn">Send Message</button>
+            </form>
+        </div>
+    </div>
+    <main class="main-content-wrapper">
+        <div class="slideshow-container full-width-hero">
+
+            <div class="mySlides fade">
+                <img src="images/Gemini_Generated_Image_58wnsj58wnsj58wn.png" alt="Fast, Efficient DC Charging Station"
+                    style="width:100%">
+                <div class="slide-caption-text">
+                    <h2 id="db-hero-t1" data-i18n="heroTitle">Premium EV Chargers for Your Electric Vehicle</h2>
+                    <p id="db-hero-s1" data-i18n="heroSubtitle">Charger (AC) - home, - office charger, (DC) - commercial
+                        charger.</p>
+                    <div class="slide-caption-products">
+                        <a href="product.html" id="db-hero-btn1" class="cta-button">Explore Products</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mySlides fade">
+                <img src="images/banner4.jpg" alt="DC Fast Charging System" style="width:100%">
+                <div class="slide-caption-text">
+                    <h2 id="db-hero-t2" data-i18n="heroTitleTwo">Certified Quality & Reliability</h2>
+                    <p id="db-hero-s2" data-i18n="heroSubtitleTwo">Our chargers meet the highest safety and performance
+                        standards.</p>
+                    <div class="slide-caption-certification">
+                        <a href="aboutus.html" id="db-hero-btn2" class="certification-button">Certification</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mySlides fade">
+                <img src="images/slide2.jpeg" alt="Home AC Wallbox Charger" style="width:100%">
+                <div class="slide-caption-text">
+                    <h2 id="db-hero-t3" data-i18n="heroTitleThree">Powering the Future of Mobility</h2>
+                    <p id="db-hero-s3" data-i18n="heroSubtitleThree">Learn more about our mission, vision, and team of
+                        experts.</p>
+                    <div class="slide-caption-aboutus">
+                        <a href="aboutus.html" id="db-hero-btn3" class="aboutus-button">Who We Are</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mySlides fade">
+                <img src="images/banner0.jpg" alt="Home AC Wallbox Charger" style="width:100%">
+                <div class="slide-caption-text">
+                    <h2 id="db-hero-t4" data-i18n="heroTitleFour">See Our Chargers in Action</h2>
+                    <p id="db-hero-s4" data-i18n="heroSubtitleFour">Explore our portfolio showing installations and
+                        product details.</p>
+                    <div class="slide-caption-gallery">
+                        <a href="aboutus.html" id="db-hero-btn4" class="gallery-button">Gallery</a>
+                    </div>
+                </div>
+            </div>
+
+            <a class="prev" onclick="plusSlides(-1)"><i class="fas fa-chevron-left"></i></a>
+            <a class="next" onclick="plusSlides(1)"><i class="fas fa-chevron-right"></i></a>
+        </div>
+
+        <section class="promo-section">
+            <h1 id="db-promo-title" data-i18n="promoTitle">Provide a Safe and Fast EV Charger For Your Electric Vehicle
+            </h1>
+            <img src="images/Certification-mark-2.png" alt="Certification" class="promo-img">
+        </section>
+        <section class="video-info-section">
+            <div class="video-info-flex">
+                <div class="video-column">
+                    <div class="video-container">
+                        <video controls poster="images/banner4.jpg">
+                            <source src="images/video3.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+                <div class="text-column">
+                    <h2 id="db-video-title" data-i18n="videoSectionTitle">Ev Chargers - AC/DC - Mymobile X Bluesky</h2>
+
+                    <p id="db-video-text" data-i18n="videoSectionText">
+                        Experience the future of refueling with our state-of-the-art charging solutions.
+                        Our chargers are designed for maximum efficiency, safety, and durability.
+                    </p>
+
+                    <ul class="feature-list">
+                        <li><i class="fas fa-check-circle"></i> <span id="db-feat1" data-i18n="feat1">Smart Load
+                                Balancing</span></li>
+                        <li><i class="fas fa-check-circle"></i> <span id="db-feat2" data-i18n="feat2">Weatherproof
+                                Design (IP54)</span></li>
+                        <li><i class="fas fa-check-circle"></i> <span id="db-feat3" data-i18n="feat3">Mobile App
+                                Integration</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <section class="compatibility-section">
+            <div class="container">
+                <h3 id="db-compat-title" data-i18n="compatibleWith">Compatible with all major EV brands</h3>
+                <div class="logo-slider">
+                    <div class="logo-track">
+                        <span>TESLA</span> <span>HYUNDAI</span> <span>KIA</span> <span>PORSCHE</span>
+                        <span>BMW</span> <span>AUDI</span> <span>MERCEDES</span> <span>TESLA</span>
+                        <span>HYUNDAI</span> <span>TOYOTA</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="products" class="products-section container">
+            <header class="section-header">
+                <span class="eyebrow-text">Products</span>
+                <h1 class="product-title" id="db-prod-main-title">Powerful Solutions for <span class="accent-text">Every
+                        Journey.</span></h1>
+            </header>
+
+            <div class="products-grid">
+                <div class="product-card ac-border">
+                    <div class="product-badge ac-bg">AC Charger</div>
+                    <div class="product-image">
+                        <img src="images/coming soon!.png" alt="AC Charger">
+                    </div>
+                    <div class="product-info">
+                        <h3 id="db-prod-ac-name" data-i18n="acChargers">AC დამტენები</h3>
+                        <p id="db-prod-ac-desc" data-i18n="acDesc">AC: პორტატული, კედელზე დასამონტაჟებელი</p>
+                        <ul class="product-features">
+                            <li><i class="fas fa-check-circle"></i> <span id="db-prod-ac-f1">7kW / 11kW / 22kW</span>
+                            </li>
+                            <li><i class="fas fa-check-circle"></i> <span id="db-prod-ac-f2">Type 2 Connector</span>
+                            </li>
+                            <li><i class="fas fa-check-circle"></i> <span id="db-prod-ac-f3">Smart App Control</span>
+                            </li>
+                        </ul>
+                        <a href="product.html" id="db-prod-ac-btn" class="cta-button ac-button"
+                            data-i18n="viewPricing">Check the prices</a>
+                    </div>
+                </div>
+
+                <div class="product-card dc-border">
+                    <div class="product-badge dc-bg">DC Fast Charger</div>
+                    <div class="product-image">
+                        <img src="images/dcchargerforproducts.png" alt="DC Charger">
+                    </div>
+                    <div class="product-info">
+                        <h3 id="db-prod-dc-name" data-i18n="dcChargers">DC დამტენები</h3>
+                        <p id="db-prod-dc-desc" data-i18n="dcDesc">პირდაპირი დენის სწრაფი დატენვა</p>
+                        <ul class="product-features">
+                            <li><i class="fas fa-bolt"></i> <span id="db-prod-dc-f1">60kW - 240kW</span></li>
+                            <li><i class="fas fa-bolt"></i> <span id="db-prod-dc-f2">Dual Connector (CCS2)</span></li>
+                            <li><i class="fas fa-bolt"></i> <span id="db-prod-dc-f3">Liquid Cooling System</span></li>
+                        </ul>
+                        <a href="product.html" id="db-prod-dc-btn" class="cta-button dc-btn"
+                            data-i18n="viewPricing">Check the prices</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="app-instruction-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 id="db-app-main-title" data-i18n="appTitle">Smart Charging with Wow Charger App</h2>
+                    <p id="db-app-subtitle" data-i18n="appSubtitle">Control your charging session from anywhere,
+                        anytime.</p>
+                </div>
+                <div class="app-flex-container">
+                    <div class="app-image-column">
+                        <img src="images/wowimage.png" alt="Wow Charger App" class="app-mockup">
+                        <div class="download-buttons">
+                            <a href="https://apps.apple.com/app/wow-charge/id1617208990" class="store-link">
+                                <i class="fab fa-apple"></i> App Store
+                            </a>
+                            <a href="https://play.google.com/store/apps/details?id=com.bluesky.ev.user"
+                                class="store-link">
+                                <i class="fab fa-google-play"></i> Google Play
+                            </a>
+                        </div>
+                    </div>
+                    <div class="app-steps-column">
+                        <div class="instruction-step">
+                            <span class="step-circle">1</span>
+                            <div class="step-text">
+                                <h4 id="db-app-s1-title" data-i18n="appStep1Title">Download & Register</h4>
+                                <p id="db-app-s1-desc" data-i18n="appStep1Desc">Install the <strong>Wow Charger</strong>
+                                    app and create an account.</p>
+                            </div>
+                        </div>
+                        <div class="instruction-step">
+                            <span class="step-circle">2</span>
+                            <div class="step-text">
+                                <h4 id="db-app-s2-title" data-i18n="appStep2Title">Connect via Bluetooth</h4>
+                                <p id="db-app-s2-desc" data-i18n="appStep2Desc">Scan and pair with your Bluesky charger
+                                    instantly.</p>
+                            </div>
+                        </div>
+                        <div class="instruction-step">
+                            <span class="step-circle">3</span>
+                            <div class="step-text">
+                                <h4 id="db-app-s3-title" data-i18n="appStep3Title">Scan to Start</h4>
+                                <p id="db-app-s3-desc" data-i18n="appStep3Desc">Scan the QR code on the charger to link
+                                    it to your account.</p>
+                            </div>
+                        </div>
+                        <div class="instruction-step">
+                            <span class="step-circle">4</span>
+                            <div class="step-text">
+                                <h4 id="db-app-s4-title" data-i18n="appStep4Title">Manage & Monitor</h4>
+                                <p id="db-app-s4-desc" data-i18n="appStep4Desc">Track energy usage and set charging
+                                    schedules in real-time.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="minimal-footer">
+        <div class="footer-container">
+            <div class="footer-copy">
+                <span id="db-footer-copy">EV Solutions © 2026</span>
+            </div>
+
+            <nav class="footer-nav">
+                <a href="#" id="db-foot-link-prod">Products</a>
+                <a href="#" id="db-foot-link-comp">Company</a>
+                <a href="#" id="db-foot-link-cert">Certification</a>
+                <a href="#" id="db-foot-link-supp">Support</a>
+                <a href="#" id="db-foot-link-priv">Privacy</a>
+            </nav>
+
+            <div class="footer-social">
+                <a href="#" id="db-social-linkedin"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" id="db-social-instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" id="db-social-facebook"><i class="fab fa-facebook-f"></i></a>
+            </div>
+        </div>
+    </footer>
+    <script src="index.js"></script>
+</body>
+
+</html>
