@@ -1,0 +1,67 @@
+backend:
+  name: git-gateway
+  branch: main # or the name of your default branch
+
+media_folder: "images"
+public_folder: "images"
+
+collections:
+  - name: "pages"
+    label: "Pages"
+    files:
+      - label: "Home Page"
+        name: "index"
+        file: "index.html"
+        fields:
+          - {label: "SEO Page Title", name: "pageTitle", widget: "string"}
+          
+          # Hero Slideshow Section
+          - label: "Hero Slideshow"
+            name: "hero_slides"
+            widget: "list"
+            fields:
+              - {label: "Slide Image", name: "image", widget: "image"}
+              - {label: "Title", name: "heroTitle", widget: "string"}
+              - {label: "Subtitle", name: "heroSubtitle", widget: "text"}
+              - {label: "Button Text", name: "btnText", widget: "string"}
+
+          # Video Section
+          - label: "Video Section"
+            name: "video_section"
+            widget: "object"
+            fields:
+              - {label: "Video Title", name: "videoSectionTitle", widget: "string"}
+              - {label: "Description Text", name: "videoSectionText", widget: "text"}
+              - {label: "Feature 1", name: "feat1", widget: "string"}
+              - {label: "Feature 2", name: "feat2", widget: "string"}
+              - {label: "Feature 3", name: "feat3", widget: "string"}
+
+          # Product Grid
+          - label: "AC Charger Card"
+            name: "ac_charger"
+            widget: "object"
+            fields:
+              - {label: "Title", name: "acChargers", widget: "string"}
+              - {label: "Description", name: "acDesc", widget: "string"}
+              - {label: "Spec 1", name: "db-prod-ac-f1", widget: "string"}
+              - {label: "Spec 2", name: "db-prod-ac-f2", widget: "string"}
+              - {label: "Spec 3", name: "db-prod-ac-f3", widget: "string"}
+
+          - label: "DC Charger Card"
+            name: "dc_charger"
+            widget: "object"
+            fields:
+              - {label: "Title", name: "dcChargers", widget: "string"}
+              - {label: "Description", name: "dcDesc", widget: "string"}
+              - {label: "Spec 1", name: "db-prod-dc-f1", widget: "string"}
+              - {label: "Spec 2", name: "db-prod-dc-f2", widget: "string"}
+              - {label: "Spec 3", name: "db-prod-dc-f3", widget: "string"}
+
+          # App Section
+          - label: "App Instructions"
+            name: "app_section"
+            widget: "object"
+            fields:
+              - {label: "Main Title", name: "appTitle", widget: "string"}
+              - {label: "Step 1 Title", name: "appStep1Title", widget: "string"}
+              - {label: "Step 1 Desc", name: "appStep1Desc", widget: "string"}
