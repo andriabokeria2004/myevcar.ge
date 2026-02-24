@@ -46,10 +46,14 @@ function resetTimer() {
 document.addEventListener('DOMContentLoaded', function () {
 
     let translations = {}; // Start with an empty object
+    // Selects both desktop and the mobile-specific buttons used on the About page
+    const allLangOptions = document.querySelectorAll('.lang-option, .lang-option-btn');
+    const dropdownToggles = document.querySelectorAll('.dropdown > .nav-link');
 
     async function loadTranslations() {
         try {
             // We fetch the file that Decap CMS edits
+            // Change this line in your index.js
             const response = await fetch('./translation.json');
             translations = await response.json();
 
@@ -60,14 +64,23 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error("Could not load translation file:", error);
         }
     }
-    // Selects both desktop and the mobile-specific buttons used on the About page
-    const allLangOptions = document.querySelectorAll('.lang-option, .lang-option-btn');
-    const dropdownToggles = document.querySelectorAll('.dropdown > .nav-link');
-
+    // --- NETLIFY IDENTITY HANDSHAKE ---
+    // This part "catches" the login from Netlify and sends you to the admin panel
+    if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+            if (!user) {
+                window.netlifyIdentity.on("login", () => {
+                    // If we are on localhost, this ensures we go back to the admin panel
+                    document.location.href = "/admin/";
+                });
+            }
+        });
+    }
     function updatePageLanguage(lang) {
         localStorage.setItem('currentLang', lang);
         document.documentElement.setAttribute('lang', lang);
 
+        // 1. Update all Text
         document.querySelectorAll('[data-i18n]').forEach(element => {
             const key = element.getAttribute('data-i18n');
             if (translations[lang] && translations[lang][key]) {
@@ -77,13 +90,14 @@ document.addEventListener('DOMContentLoaded', function () {
                     element.textContent = translations[lang][key];
                 }
             }
-            // Add this inside updatePageLanguage to allow your uncle to change images too
-            document.querySelectorAll('[data-i18n-img]').forEach(img => {
-                const key = img.getAttribute('data-i18n-img');
-                if (translations[lang] && translations[lang][key]) {
-                    img.src = translations[lang][key];
-                }
-            });
+        });
+
+        // 2. Update all Images (Move this OUTSIDE the loop above)
+        document.querySelectorAll('[data-i18n-img]').forEach(img => {
+            const key = img.getAttribute('data-i18n-img');
+            if (translations[lang] && translations[lang][key]) {
+                img.src = translations[lang][key];
+            }
         });
 
         allLangOptions.forEach(opt => opt.classList.toggle('active', opt.dataset.lang === lang));
