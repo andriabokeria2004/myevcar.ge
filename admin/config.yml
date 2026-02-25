@@ -1,27 +1,114 @@
 backend:
   name: git-gateway
-  branch: main # or the name of your default branch
+  branch: main
 
 media_folder: "images"
 public_folder: "images"
+
 collections:
   - name: "translations"
-    label: "Translations"
+    label: "Site Translations"
     files:
-      - label: "Site Language Data"
-        name: "data"
-        file: "translation.json" # This matches your JS fetch!
+      - label: "Home Page Content"
+        name: "home_data"
+        file: "translation.json"
         fields:
           - label: "Georgian (KA)"
             name: "ka"
             widget: "object"
             fields:
-              - {label: "Home Title", name: "heroTitle", widget: "string"}
-              - {label: "Home Subtitle", name: "heroSubtitle", widget: "string"}
-              # Add all your translation keys here
+              # Navigation & General
+              - {label: "Home Link", name: "home", widget: "string"}
+              - {label: "Chargers Link", name: "chargers", widget: "string"}
+              - {label: "About Link", name: "about", widget: "string"}
+              - {label: "Gallery Link", name: "gallery", widget: "string"}
+              - {label: "Contact Link", name: "contact", widget: "string"}
+              - {label: "Certification Link", name: "certification", widget: "string"}
+              - {label: "SEO Page Title", name: "pageTitle", widget: "string"}
+              
+              # Hero Slideshow
+              - {label: "Hero 1 Title", name: "heroTitle", widget: "string"}
+              - {label: "Hero 1 Subtitle", name: "heroSubtitle", widget: "string"}
+              - {label: "Hero 2 Title", name: "heroTitleTwo", widget: "string"}
+              - {label: "Hero 2 Subtitle", name: "heroSubtitleTwo", widget: "string"}
+              - {label: "Hero 3 Title", name: "heroTitleThree", widget: "string"}
+              - {label: "Hero 3 Subtitle", name: "heroSubtitleThree", widget: "string"}
+              - {label: "Hero 4 Title", name: "heroTitleFour", widget: "string"}
+              - {label: "Hero 4 Subtitle", name: "heroSubtitleFour", widget: "string"}
+              
+              # Promo & Video
+              - {label: "Promo Title", name: "promoTitle", widget: "string"}
+              - {label: "Video Title", name: "videoSectionTitle", widget: "string"}
+              - {label: "Video Description", name: "videoSectionText", widget: "text"}
+              - {label: "Feature 1", name: "feat1", widget: "string"}
+              - {label: "Feature 2", name: "feat2", widget: "string"}
+              - {label: "Feature 3", name: "feat3", widget: "string"}
+              
+              # Products
+              - {label: "AC Title", name: "acChargers", widget: "string"}
+              - {label: "AC Description", name: "acDesc", widget: "string"}
+              - {label: "DC Title", name: "dcChargers", widget: "string"}
+              - {label: "DC Description", name: "dcDesc", widget: "string"}
+              - {label: "View Pricing Button", name: "viewPricing", widget: "string"}
+              
+              # App Section
+              - {label: "App Title", name: "appTitle", widget: "string"}
+              - {label: "App Subtitle", name: "appSubtitle", widget: "string"}
+              - {label: "Step 1 Title", name: "appStep1Title", widget: "string"}
+              - {label: "Step 1 Desc", name: "appStep1Desc", widget: "string"}
+              - {label: "Step 2 Title", name: "appStep2Title", widget: "string"}
+              - {label: "Step 2 Desc", name: "appStep2Desc", widget: "string"}
+              - {label: "Step 3 Title", name: "appStep3Title", widget: "string"}
+              - {label: "Step 3 Desc", name: "appStep3Desc", widget: "string"}
+              - {label: "Step 4 Title", name: "appStep4Title", widget: "string"}
+              - {label: "Step 4 Desc", name: "appStep4Desc", widget: "string"}
+
           - label: "English (EN)"
             name: "en"
             widget: "object"
             fields:
-              - {label: "Home Title", name: "heroTitle", widget: "string"}
-              - {label: "Home Subtitle", name: "heroSubtitle", widget: "string"}
+              # Navigation & General
+              - {label: "Home Link", name: "home", widget: "string"}
+              - {label: "Chargers Link", name: "chargers", widget: "string"}
+              - {label: "About Link", name: "about", widget: "string"}
+              - {label: "Gallery Link", name: "gallery", widget: "string"}
+              - {label: "Contact Link", name: "contact", widget: "string"}
+              - {label: "Certification Link", name: "certification", widget: "string"}
+              - {label: "SEO Page Title", name: "pageTitle", widget: "string"}
+              
+              # Hero Slideshow
+              - {label: "Hero 1 Title", name: "heroTitle", widget: "string"}
+              - {label: "Hero 1 Subtitle", name: "heroSubtitle", widget: "string"}
+              - {label: "Hero 2 Title", name: "heroTitleTwo", widget: "string"}
+              - {label: "Hero 2 Subtitle", name: "heroSubtitleTwo", widget: "string"}
+              - {label: "Hero 3 Title", name: "heroTitleThree", widget: "string"}
+              - {label: "Hero 3 Subtitle", name: "heroSubtitleThree", widget: "string"}
+              - {label: "Hero 4 Title", name: "heroTitleFour", widget: "string"}
+              - {label: "Hero 4 Subtitle", name: "heroSubtitleFour", widget: "string"}
+              
+              # Promo & Video
+              - {label: "Promo Title", name: "promoTitle", widget: "string"}
+              - {label: "Video Title", name: "videoSectionTitle", widget: "string"}
+              - {label: "Video Description", name: "videoSectionText", widget: "text"}
+              - {label: "Feature 1", name: "feat1", widget: "string"}
+              - {label: "Feature 2", name: "feat2", widget: "string"}
+              - {label: "Feature 3", name: "feat3", widget: "string"}
+              
+              # Products
+              - {label: "AC Title", name: "acChargers", widget: "string"}
+              - {label: "AC Description", name: "acDesc", widget: "string"}
+              - {label: "DC Title", name: "dcChargers", widget: "string"}
+              - {label: "DC Description", name: "dcDesc", widget: "string"}
+              - {label: "View Pricing Button", name: "viewPricing", widget: "string"}
+              
+              # App Section
+              - {label: "App Title", name: "appTitle", widget: "string"}
+              - {label: "App Subtitle", name: "appSubtitle", widget: "string"}
+              - {label: "Step 1 Title", name: "appStep1Title", widget: "string"}
+              - {label: "Step 1 Desc", name: "appStep1Desc", widget: "string"}
+              - {label: "Step 2 Title", name: "appStep2Title", widget: "string"}
+              - {label: "Step 2 Desc", name: "appStep2Desc", widget: "string"}
+              - {label: "Step 3 Title", name: "appStep3Title", widget: "string"}
+              - {label: "Step 3 Desc", name: "appStep3Desc", widget: "string"}
+              - {label: "Step 4 Title", name: "appStep4Title", widget: "string"}
+              - {label: "Step 4 Desc", name: "appStep4Desc", widget: "string"}
