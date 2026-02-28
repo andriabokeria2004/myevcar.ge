@@ -112,3 +112,83 @@ collections:
               - {label: "Step 3 Desc", name: "appStep3Desc", widget: "string"}
               - {label: "Step 4 Title", name: "appStep4Title", widget: "string"}
               - {label: "Step 4 Desc", name: "appStep4Desc", widget: "string"}
+            # --- PRODUCT PAGE CONTENT ---
+      - label: "Product Page Content"
+        name: "product_page"
+        file: "product_translation.json"
+        fields:
+          - label: "Georgian (KA)"
+            name: "ka"
+            widget: "object"
+            fields:
+              - {label: "SEO Page Title", name: "pageTitle", widget: "string"}
+              - {label: "Power Output Label", name: "label_power", widget: "string"}
+              - {label: "Color/Finish Label", name: "label_finish", widget: "string"}
+              - {label: "Order Button", name: "btn_order", widget: "string"}
+              - {label: "Get Quote Button", name: "btn_quote", widget: "string"}
+              
+              # Product 1 (CDZ-J)
+              - label: "Product 1: CDZ-J"
+                name: "p1"
+                widget: "object"
+                fields:
+                  - {label: "Title", name: "p1_title", widget: "string"}
+                  - {label: "Description", name: "p1_desc", widget: "text"}
+              
+              # Product 2 (CDZ-BT)
+              - label: "Product 2: CDZ-BT"
+                name: "p2"
+                widget: "object"
+                fields:
+                  - {label: "Title", name: "p2_title", widget: "string"}
+                  - {label: "Description", name: "p2_desc", widget: "text"}
+
+              # Product 3 (CDZ-BT AC)
+              - label: "Product 3: CDZ-BT AC"
+                name: "p3"
+                widget: "object"
+                fields:
+                  - {label: "Title", name: "p3_title", widget: "string"}
+                  - {label: "Description", name: "p3_desc", widget: "text"}
+
+              # ფერების დასახელებები (რადგან ყველა პროდუქტზე მეორდება)
+              - label: "Color Names"
+                name: "colors"
+                widget: "object"
+                fields:
+                  - {label: "Black", name: "color_black", widget: "string"}
+                  - {label: "Grey", name: "color_grey", widget: "string"}
+                  - {label: "Orange", name: "color_orange", widget: "string"}
+                  - {label: "Blue", name: "color_blue", widget: "string"}
+                  - {label: "Green", name: "color_green", widget: "string"}
+                  - {label: "White", name: "color_white", widget: "string"}
+
+          - label: "English (EN)"
+            name: "en"
+            widget: "object"
+            fields:
+              - {label: "SEO Page Title", name: "pageTitle", widget: "string"}
+              - {label: "Power Output Label", name: "label_power", widget: "string"}
+              - {label: "Color/Finish Label", name: "label_finish", widget: "string"}
+              - {label: "Order Button", name: "btn_order", widget: "string"}
+              - {label: "Get Quote Button", name: "btn_quote", widget: "string"}
+              
+              - label: "Product 1: CDZ-J"
+                name: "p1"
+                widget: "object"
+                fields:
+                  - {label: "Title", name: "p1_title", widget: "string"}
+                  - {label: "Description", name: "p1_desc", widget: "text"}
+
+              - label: "Color Names"
+                name: "colors"
+                widget: "object"
+                fields:
+                  - {label: "Black", name: "color_black", widget: "string"}
+                  - {label: "Grey", name: "color_grey", widget: "string"}
+                  - {label: "Orange", name: "color_orange", widget: "string"}
+                  - {label: "Blue", name: "color_blue", widget: "string"}
+                  - {label: "Green", name: "color_green", widget: "string"}
+                  - {label: "White", name: "color_white", widget: "string"}
+
+              

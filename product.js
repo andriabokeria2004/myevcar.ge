@@ -4,82 +4,34 @@
     en: { code: "EN", flag: "https://flagcdn.com/w20/us.png" },
     ka: { code: "KA", flag: "https://flagcdn.com/w20/ge.png" }
 };
-
-const translations = {
-    en: {
-        pageTitle: "AC & DC Chargers",
-        home: "Home",
-        chargers: "Chargers",
-        about: "About Us",
-        contact: "Contact Us",
-        gallery: "Gallery",
-        acChargers: "AC Chargers",
-        dcChargers: "DC Chargers",
-        acDesc: "AC: portable, wall-mounted",
-        dcDesc: "Direct Current Fast Charging",
-        allProducts: "All Products",
-        heroTitle: "Premium EV Chargers",
-        heroSubtitle: "Solutions for home, office, and commercial use.",
-        exploreProducts: "Explore Products",
-        badge_ac: "AC Solution",
-        badge_dc: "DC Fast Charge",
-        label_color: "Color",
-        label_edition: "Edition",
-        btn_order: "Order Now",
-        btn_quote: "Get Quote",
-        color_matte_black: "Matte Black",
-        color_charcoal: "Charcoal Grey",
-        color_lime_green: "Lime Green",
-        color_forest_green: "Forest Green",
-        color_electric_blue: "Electric Blue",
-        color_sky_blue: "Sky Blue",
-        color_solar_yellow: "Solar Yellow",
-        color_lava_orange: "Lava Orange",
-        color_crimson_red: "Crimson Red",
-        color_pearl_white: "Pearl White",
-        color_silver_metallic: "Silver Metallic",
-        p1_title: "CDZ-J",
-        p1_desc: `Appearance model: CDZ - J...`, // შემოკლებული საჩვენებლად
-        // ... დაამატე დანარჩენი p2-p8
-    },
-    ka: {
-        pageTitle: "AC & DC დამტენები",
-        home: "მთავარი",
-        chargers: "დამტენები",
-        about: "ჩვენ შესახებ",
-        contact: "კონტაქტი",
-        gallery: "გალერეა",
-        acChargers: "AC დამტენები",
-        dcChargers: "DC დამტენები",
-        acDesc: "AC: პორტატული, კედლის",
-        dcDesc: "DC სწრაფი დამუხტვა",
-        allProducts: "ყველა პროდუქტი",
-        heroTitle: "პრემიუმ დამტენები",
-        heroSubtitle: "გადაწყვეტილებები სახლისა და ბიზნესისთვის.",
-        exploreProducts: "პროდუქტები",
-        badge_ac: "AC სისტემა",
-        badge_dc: "DC სწრაფი",
-        label_finish: "ფერი",
-        label_edition: "ვერსია",
-        btn_order: "შეუკვეთე",
-        btn_quote: "ფასის გაგება",
-        color_matte_black: "მატოვი შავი",
-        color_charcoal: "ნაცრისფერი",
-        color_lime_green: "ლაიმის მწვანე",
-        color_forest_green: "მუქი მწვანე",
-        color_electric_blue: "ელექტრო ლურჯი",
-        color_sky_blue: "ცისფერი",
-        color_solar_yellow: "მზისფერი ყვითელი",
-        color_lava_orange: "ნარინჯისფერი",
-        color_crimson_red: "ალისფერი",
-        color_pearl_white: "მარგალიტისფერი თეთრი",
-        color_silver_metallic: "ვერცხლისფერი მეტალიკი",
-        p1_title: "CDZ-J",
-        p1_desc: "მოდელი: CDZ-J, სიმძლავრე: 20/30/40კვტ..."
-    }
-};
+let translations = {};
 
 document.addEventListener('DOMContentLoaded', function () {
+    async function initTranslations() {
+        try {
+            // ვიწერთ ორივე ფაილს
+            const [baseRes, productsRes] = await Promise.all([
+                fetch('./translation.json'),
+                fetch('./product.json')
+            ]);
+
+            const baseData = await baseRes.json();
+            const productsData = await productsRes.json();
+
+            // ვაერთიანებთ ობიექტებს
+            translations = {
+                en: { ...baseData.en, ...productsData.en },
+                ka: { ...baseData.ka, ...productsData.ka }
+            };
+
+            // მხოლოდ ჩატვირთვის შემდეგ ვუშვებთ საწყის ენას
+            const savedLang = localStorage.getItem('currentLang') || 'ka';
+            updatePageLanguage(savedLang);
+
+        } catch (error) {
+            console.error("ვერ მოხერხდა ფაილების ჩატვირთვა:", error);
+        }
+    }
     // --- Elements ---
     const mobileMenuBtn = document.getElementById('mobileMenuToggle');
     const navbar = document.getElementById('mobileNavMenu');
@@ -111,19 +63,27 @@ document.addEventListener('DOMContentLoaded', function () {
         allLangOptions.forEach(opt => opt.classList.toggle('active', opt.dataset.lang === lang));
         updateLanguageButton(lang);
     }
+    function updatePageLanguage(lang) {
+        if (!translations[lang]) return; // თუ მონაცემები ჯერ არ ჩატვირთულა
 
-    function updateLanguageButton(lang) {
-        if (!langToggle) return;
-        const currentFlagEl = langToggle.querySelector('.current-flag');
-        const secondaryFlagEl = langToggle.querySelector('.secondary-flag');
-        const langCodeEl = langToggle.querySelector('.lang-code');
-        const secondaryKey = lang === 'en' ? 'ka' : 'en';
+        localStorage.setItem('currentLang', lang);
+        document.documentElement.setAttribute('lang', lang);
 
-        if (currentFlagEl) currentFlagEl.src = flagMap[lang].flag;
-        if (secondaryFlagEl) secondaryFlagEl.src = flagMap[secondaryKey].flag;
-        if (langCodeEl) langCodeEl.textContent = flagMap[lang].code;
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+            const key = element.getAttribute('data-i18n');
+            if (translations[lang] && translations[lang][key]) {
+                if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                    element.placeholder = translations[lang][key];
+                } else {
+                    // ტექსტის ნაცვლად ვიყენებთ innerHTML-ს
+                    element.innerHTML = translations[lang][key];
+                }
+            }
+        });
+
+        allLangOptions.forEach(opt => opt.classList.toggle('active', opt.dataset.lang === lang));
+        updateLanguageButton(lang);
     }
-
     // 2. Navigation & Language Events
     allLangOptions.forEach(option => {
         option.addEventListener('click', (e) => {
@@ -264,6 +224,5 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Initial Load
-    const savedLang = localStorage.getItem('currentLang') || 'ka';
-    updatePageLanguage(savedLang);
+    initTranslations();
 });
