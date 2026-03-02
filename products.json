@@ -1,44 +1,18 @@
 {
   "products": [
     {
-      "id": "ANDro",
-      "category": "DC",
-      "title_ka": "asdasdasd",
-      "title_en": "asdasd",
-      "desc_ka": "asdasdasd",
-      "desc_en": "asdasd",
-      "variants": [
-        {
-          "kw": "asdasd",
-          "price": 213123124
-        },
-        {
-          "kw": "213123",
-          "price": 214214117
-        }
-      ],
-      "colors": [
-        {
-          "color_ka": "asdasd",
-          "color_en": "asdasd",
-          "color_code": "asdad",
-          "image": "images/CDZ-AGREY.png"
-        },
-        {
-          "color_ka": "asdasd",
-          "color_en": "asdasd",
-          "color_code": "asdasd",
-          "image": "images/CDZ-ABLACK.png"
-        }
-      ]
-    },
-    {
-      "id": "ასდ",
+      "id": "ასდასდ",
       "category": "DC",
       "title_ka": "ასდასდ",
-      "title_en": "ასდადს",
-      "desc_ka": "ასდასდ",
-      "desc_en": "ასდასდასდასდასდ"
+      "title_en": "ასდასდ",
+      "desc_ka": "სადასდ",
+      "desc_en": "ასდასდ",
+      "variants": [
+        {
+          "kw": "სადასდ",
+          "price": -5
+        }
+      ]
     }
   ]
 }
