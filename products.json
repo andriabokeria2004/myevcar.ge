@@ -1,3 +1,18 @@
 {
-  "products": []
+  "products": [
+    {
+      "id": "CDZ BT ",
+      "title_ka": "მაღალხარისხიანი დამტენი ",
+      "category": "DC",
+      "title_en": "high qualitty charger",
+      "desc_ka": "მაღალხარისხიანი დამტენი ცდზ-ბტ ასკდაჯსდლადსჯ ბლალბაბლა",
+      "desc_en": "high quality charger cdz-bt blablalbal",
+      "variants": [
+        {
+          "kw": "123",
+          "price": 141444
+        }
+      ]
+    }
+  ]
 }
