@@ -1305,3 +1305,126 @@ h4 {
         /* Prevents horizontal poking out */
     }
 }
+.product-image-side {
+    flex: 1; /* იკავებს ხელმისაწვდომი სივრცის ნაწილს */
+    max-width: 450px;
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-product-img {
+    width: 100%;
+    height: 350px;
+    object-fit: contain; /* სურათი არ გაიწელება */
+    transition: transform 0.3s ease;
+}
+
+.main-product-img:hover {
+    transform: scale(1.05); /* მსუბუქი Zoom ეფექტი */
+}
+/* kW ღილაკები */
+.kw-options {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.kw-btn {
+    padding: 8px 16px;
+    border: 2px solid #ddd;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.kw-btn.active, .kw-btn:hover {
+    border-color: #007bff;
+    color: #007bff;
+    background: #f0f7ff;
+}
+
+/* ფერების სვოჩები */
+.color-swatches {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.swatch {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 0 0 1px #ddd; /* გარეთა ჩარჩო */
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.swatch.active {
+    box-shadow: 0 0 0 2px #007bff;
+    transform: scale(1.1);
+}
+.product-price-action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.price-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.price-label {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.price {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #333;
+}
+
+.contact-btn {
+    padding: 12px 30px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.contact-btn:hover {
+    background-color: #0056b3;
+}
+.product-row {
+    display: flex;
+    gap: 40px;
+    background: white;
+    margin-bottom: 40px;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+@media (max-width: 768px) {
+    .product-row {
+        flex-direction: column; /* მობილურზე სურათი იქნება ზემოთ, ტექსტი ქვემოთ */
+    }
+    .product-image-side {
+        max-width: 100%;
+    }
+}

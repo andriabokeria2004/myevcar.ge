@@ -1,48 +1,152 @@
 {
-  "en": {
-    "pageTitle": "AC & DC Chargers",
-    "label_power": "Power Output Label",
-    "label_finish": "Color/Finish Label",
-    "btn_order": "Order Now",
-    "btn_quote": "Get Quote",
-    "p1": {
-      "p1_title": "CDZ-J",
-      "p1_desc": "Appearance model: CDZ - J..."
+  "products": [
+    {
+      "id": "p1",
+      "category": "DC",
+      "title_ka": "CDZ-J სწრაფი დამტენი",
+      "title_en": "CDZ-J Fast Charger",
+      "desc_ka": "მაღალი ეფექტურობის DC მოდული ჭკვიანი ბალანსირებით.",
+      "desc_en": "High-efficiency DC module with smart balancing.",
+      "variants": [
+        { "kw": "30", "price": "1200" },
+        { "kw": "60", "price": "1800" }
+      ],
+      "colors": [
+        { "color_code": "#000000", "image": "img/p1-black.png" },
+        { "color_code": "#808080", "image": "img/p1-grey.png" }
+      ]
     },
-    "colors": {
-      "color_black": "Matte Black",
-      "color_grey": "Charcoal Grey",
-      "color_orange": "Lava Orange",
-      "color_blue": "Electric Blue",
-      "color_green": "Forest Green",
-      "color_white": "Pearl White"
+    {
+      "id": "p2",
+      "category": "DC",
+      "title_ka": "CDZ-BT კომერციული",
+      "title_en": "CDZ-BT Commercial",
+      "desc_ka": "მძლავრი სადგური საჯარო პარკინგებისთვის.",
+      "desc_en": "Powerful station for public parking areas.",
+      "variants": [
+        { "kw": "120", "price": "4500" },
+        { "kw": "180", "price": "6200" }
+      ],
+      "colors": [
+        { "color_code": "#ffffff", "image": "img/p2-white.png" }
+      ]
+    },
+    {
+      "id": "p3",
+      "category": "AC",
+      "title_ka": "სახლის დამტენი Smart",
+      "title_en": "Home Charger Smart",
+      "desc_ka": "კომპაქტური და ჭკვიანი დამტენი სახლისთვის.",
+      "desc_en": "Compact and smart charger for home use.",
+      "variants": [
+        { "kw": "7", "price": "750" },
+        { "kw": "11", "price": "950" }
+      ],
+      "colors": [
+        { "color_code": "#333333", "image": "img/p3-dark.png" }
+      ]
+    },
+    {
+      "id": "p4",
+      "category": "AC",
+      "title_ka": "ბიზნეს AC სადგური",
+      "title_en": "Business AC Station",
+      "desc_ka": "იდეალურია ოფისებისა და სასტუმროებისთვის.",
+      "desc_en": "Ideal for offices and hotels.",
+      "variants": [
+        { "kw": "22", "price": "1400" }
+      ],
+      "colors": [
+        { "color_code": "#C0C0C0", "image": "img/p4-silver.png" }
+      ]
+    },
+    {
+      "id": "p5",
+      "category": "DC",
+      "title_ka": "ულტრა სწრაფი Hyper",
+      "title_en": "Ultra Fast Hyper",
+      "desc_ka": "უახლესი თაობის ჰიპერ-დამტენი.",
+      "desc_en": "Latest generation hyper-charger.",
+      "variants": [
+        { "kw": "240", "price": "8500" },
+        { "kw": "360", "price": "11000" }
+      ],
+      "colors": [
+        { "color_code": "#1a1a1a", "image": "img/p5-pro.png" }
+      ]
+    },
+    {
+      "id": "p6",
+      "category": "AC",
+      "title_ka": "პორტატული დამტენი",
+      "title_en": "Portable Charger",
+      "desc_ka": "დამტენი, რომელიც ყოველთვის თან გექნებათ.",
+      "desc_en": "A charger you can always carry with you.",
+      "variants": [
+        { "kw": "3.5", "price": "400" },
+        { "kw": "7", "price": "600" }
+      ],
+      "colors": [
+        { "color_code": "#ff0000", "image": "img/p6-red.png" },
+        { "color_code": "#000000", "image": "img/p6-black.png" }
+      ]
+    },
+    {
+      "id": "p7",
+      "category": "DC",
+      "title_ka": "კომპაქტური DC 20",
+      "title_en": "Compact DC 20",
+      "desc_ka": "მცირე ზომის DC დამტენი კერძო სექტორისთვის.",
+      "desc_en": "Small DC charger for private sector.",
+      "variants": [
+        { "kw": "20", "price": "2100" }
+      ],
+      "colors": [
+        { "color_code": "#ffffff", "image": "img/p7-white.png" }
+      ]
+    },
+    {
+      "id": "p8",
+      "category": "AC",
+      "title_ka": "Wallbox Plus",
+      "title_en": "Wallbox Plus",
+      "desc_ka": "კედელზე დასამონტაჟებელი პრემიუმ მოდელი.",
+      "desc_en": "Premium wall-mounted model.",
+      "variants": [
+        { "kw": "11", "price": "1100" },
+        { "kw": "22", "price": "1600" }
+      ],
+      "colors": [
+        { "color_code": "#4A90E2", "image": "img/p8-blue.png" }
+      ]
+    },
+    {
+      "id": "p9",
+      "category": "DC",
+      "title_ka": "ავტობუსების დამტენი",
+      "title_en": "Bus Fleet Charger",
+      "desc_ka": "სპეციალიზებული სადგური მძიმე ტექნიკისთვის.",
+      "desc_en": "Specialized station for heavy vehicles.",
+      "variants": [
+        { "kw": "150", "price": "5500" }
+      ],
+      "colors": [
+        { "color_code": "#f1c40f", "image": "img/p9-yellow.png" }
+      ]
+    },
+    {
+      "id": "p10",
+      "category": "AC",
+      "title_ka": "Dual Port Station",
+      "title_en": "Dual Port Station",
+      "desc_ka": "ორი ავტომობილის ერთდროული დატენვა.",
+      "desc_en": "Simultaneous charging for two vehicles.",
+      "variants": [
+        { "kw": "44", "price": "2800" }
+      ],
+      "colors": [
+        { "color_code": "#2ecc71", "image": "img/p10-green.png" }
+      ]
     }
-  },
-  "ka": {
-    "pageTitle": "AC & DC დამტენები",
-    "label_power": "სიმძლავრის მარკირება",
-    "label_finish": "ფერის მარკირება",
-    "btn_order": "შეუკვეთე",
-    "btn_quote": "ფასის გაგება",
-    "p1": {
-      "p1_title": "CDZ-J",
-      "p1_desc": "მოდელი: CDZ-J, სიმძლავრე: 20/30/40კვტ..."
-    },
-    "p2": {
-      "p2_title": "CDZ-BT",
-      "p2_desc": "პროდუქტის აღწერა აქ..."
-    },
-    "p3": {
-      "p3_title": "CDZ-BT AC",
-      "p3_desc": "პროდუქტის აღწერა აქ..."
-    },
-    "colors": {
-      "color_black": "მატოვი შავი",
-      "color_grey": "ნაცრისფერი",
-      "color_orange": "ნარინჯისფერი",
-      "color_blue": "ელექტრო ლურჯი",
-      "color_green": "მუქი მწვანე",
-      "color_white": "მარგალიტისფერი თეთრი"
-    }
-  }
+  ]
 }

@@ -6,6 +6,7 @@ media_folder: "images"
 public_folder: "images"
 
 collections:
+  # 1. შენი არსებული პირველი გვერდის კონფიგი (უცვლელი)
   - name: "translations"
     label: "Site Translations"
     files:
@@ -13,11 +14,11 @@ collections:
         name: "home_data"
         file: "translation.json"
         fields:
+          # --- GEORGIAN SECTION ---
           - label: "Georgian (KA)"
             name: "ka"
             widget: "object"
             fields:
-              # Navigation & General
               - {label: "Home Link", name: "home", widget: "string"}
               - {label: "Chargers Link", name: "chargers", widget: "string"}
               - {label: "About Link", name: "about", widget: "string"}
@@ -25,8 +26,6 @@ collections:
               - {label: "Contact Link", name: "contact", widget: "string"}
               - {label: "Certification Link", name: "certification", widget: "string"}
               - {label: "SEO Page Title", name: "pageTitle", widget: "string"}
-              
-              # Hero Slideshow
               - {label: "Hero 1 Title", name: "heroTitle", widget: "string"}
               - {label: "Hero 1 Subtitle", name: "heroSubtitle", widget: "string"}
               - {label: "Hero 2 Title", name: "heroTitleTwo", widget: "string"}
@@ -35,23 +34,17 @@ collections:
               - {label: "Hero 3 Subtitle", name: "heroSubtitleThree", widget: "string"}
               - {label: "Hero 4 Title", name: "heroTitleFour", widget: "string"}
               - {label: "Hero 4 Subtitle", name: "heroSubtitleFour", widget: "string"}
-              
-              # Promo & Video
               - {label: "Promo Title", name: "promoTitle", widget: "string"}
               - {label: "Video Title", name: "videoSectionTitle", widget: "string"}
               - {label: "Video Description", name: "videoSectionText", widget: "text"}
               - {label: "Feature 1", name: "feat1", widget: "string"}
               - {label: "Feature 2", name: "feat2", widget: "string"}
               - {label: "Feature 3", name: "feat3", widget: "string"}
-              
-              # Products
               - {label: "AC Title", name: "acChargers", widget: "string"}
               - {label: "AC Description", name: "acDesc", widget: "string"}
               - {label: "DC Title", name: "dcChargers", widget: "string"}
               - {label: "DC Description", name: "dcDesc", widget: "string"}
               - {label: "View Pricing Button", name: "viewPricing", widget: "string"}
-              
-              # App Section
               - {label: "App Title", name: "appTitle", widget: "string"}
               - {label: "App Subtitle", name: "appSubtitle", widget: "string"}
               - {label: "Step 1 Title", name: "appStep1Title", widget: "string"}
@@ -63,11 +56,11 @@ collections:
               - {label: "Step 4 Title", name: "appStep4Title", widget: "string"}
               - {label: "Step 4 Desc", name: "appStep4Desc", widget: "string"}
 
+          # --- ENGLISH SECTION ---
           - label: "English (EN)"
             name: "en"
             widget: "object"
             fields:
-              # Navigation & General
               - {label: "Home Link", name: "home", widget: "string"}
               - {label: "Chargers Link", name: "chargers", widget: "string"}
               - {label: "About Link", name: "about", widget: "string"}
@@ -75,8 +68,6 @@ collections:
               - {label: "Contact Link", name: "contact", widget: "string"}
               - {label: "Certification Link", name: "certification", widget: "string"}
               - {label: "SEO Page Title", name: "pageTitle", widget: "string"}
-              
-              # Hero Slideshow
               - {label: "Hero 1 Title", name: "heroTitle", widget: "string"}
               - {label: "Hero 1 Subtitle", name: "heroSubtitle", widget: "string"}
               - {label: "Hero 2 Title", name: "heroTitleTwo", widget: "string"}
@@ -85,23 +76,17 @@ collections:
               - {label: "Hero 3 Subtitle", name: "heroSubtitleThree", widget: "string"}
               - {label: "Hero 4 Title", name: "heroTitleFour", widget: "string"}
               - {label: "Hero 4 Subtitle", name: "heroSubtitleFour", widget: "string"}
-              
-              # Promo & Video
               - {label: "Promo Title", name: "promoTitle", widget: "string"}
               - {label: "Video Title", name: "videoSectionTitle", widget: "string"}
               - {label: "Video Description", name: "videoSectionText", widget: "text"}
               - {label: "Feature 1", name: "feat1", widget: "string"}
               - {label: "Feature 2", name: "feat2", widget: "string"}
               - {label: "Feature 3", name: "feat3", widget: "string"}
-              
-              # Products
               - {label: "AC Title", name: "acChargers", widget: "string"}
               - {label: "AC Description", name: "acDesc", widget: "string"}
               - {label: "DC Title", name: "dcChargers", widget: "string"}
               - {label: "DC Description", name: "dcDesc", widget: "string"}
               - {label: "View Pricing Button", name: "viewPricing", widget: "string"}
-              
-              # App Section
               - {label: "App Title", name: "appTitle", widget: "string"}
               - {label: "App Subtitle", name: "appSubtitle", widget: "string"}
               - {label: "Step 1 Title", name: "appStep1Title", widget: "string"}
@@ -112,83 +97,137 @@ collections:
               - {label: "Step 3 Desc", name: "appStep3Desc", widget: "string"}
               - {label: "Step 4 Title", name: "appStep4Title", widget: "string"}
               - {label: "Step 4 Desc", name: "appStep4Desc", widget: "string"}
-            # --- PRODUCT PAGE CONTENT ---
-      - label: "Product Page Content"
-        name: "product_page"
-        file: "product_translation.json"
+# 2. პროდუქცის გვერდი 
+
+# --- პროდუქტების გვერდის ინტერფეისი (Header, Dropdown, Contact Modal) ---
+      - label: "Products Page UI"
+        name: "products_ui"
+        file: "products_translation.json"
         fields:
+          # --- GEORGIAN SECTION ---
           - label: "Georgian (KA)"
             name: "ka"
             widget: "object"
             fields:
-              - {label: "SEO Page Title", name: "pageTitle", widget: "string"}
-              - {label: "Power Output Label", name: "label_power", widget: "string"}
-              - {label: "Color/Finish Label", name: "label_finish", widget: "string"}
-              - {label: "Order Button", name: "btn_order", widget: "string"}
-              - {label: "Get Quote Button", name: "btn_quote", widget: "string"}
-              
-              # Product 1 (CDZ-J)
-              - label: "Product 1: CDZ-J"
-                name: "p1"
-                widget: "object"
-                fields:
-                  - {label: "Title", name: "p1_title", widget: "string"}
-                  - {label: "Description", name: "p1_desc", widget: "text"}
-              
-              # Product 2 (CDZ-BT)
-              - label: "Product 2: CDZ-BT"
-                name: "p2"
-                widget: "object"
-                fields:
-                  - {label: "Title", name: "p2_title", widget: "string"}
-                  - {label: "Description", name: "p2_desc", widget: "text"}
+              - {label: "გვერდის სათაური (SEO)", name: "pageTitle", widget: "string"}
+              - {label: "მთავარი", name: "home", widget: "string"}
+              - {label: "დამტენები", name: "chargers", widget: "string"}
+              - {label: "AC დამტენები", name: "acChargers", widget: "string"}
+              - {label: "AC მოკლე აღწერა", name: "acDesc", widget: "string"}
+              - {label: "DC დამტენები", name: "dcChargers", widget: "string"}
+              - {label: "DC მოკლე აღწერა", name: "dcDesc", widget: "string"}
+              - {label: "ყველა პროდუქტი", name: "allProducts", widget: "string"}
+              - {label: "ჩვენს შესახებ", name: "about", widget: "string"}
+              - {label: "ვინ ვართ ჩვენ", name: "whoWeAre", widget: "string"}
+              - {label: "სერტიფიცირება", name: "certification", widget: "string"}
+              - {label: "კონტაქტი", name: "contact", widget: "string"}
+              - {label: "გალერეა", name: "gallery", widget: "string"}
+              # კონტაქტის მოდალი
+              - {label: "Placeholder: სახელი", name: "contactName", widget: "string"}
+              - {label: "Placeholder: მეილი", name: "contactEmail", widget: "string"}
+              - {label: "Placeholder: მესიჯი", name: "contactMsg", widget: "string"}
+              - {label: "ღილაკი: გაგზავნა", name: "contactBtn", widget: "string"}
 
-              # Product 3 (CDZ-BT AC)
-              - label: "Product 3: CDZ-BT AC"
-                name: "p3"
-                widget: "object"
-                fields:
-                  - {label: "Title", name: "p3_title", widget: "string"}
-                  - {label: "Description", name: "p3_desc", widget: "text"}
-
-              # ფერების დასახელებები (რადგან ყველა პროდუქტზე მეორდება)
-              - label: "Color Names"
-                name: "colors"
-                widget: "object"
-                fields:
-                  - {label: "Black", name: "color_black", widget: "string"}
-                  - {label: "Grey", name: "color_grey", widget: "string"}
-                  - {label: "Orange", name: "color_orange", widget: "string"}
-                  - {label: "Blue", name: "color_blue", widget: "string"}
-                  - {label: "Green", name: "color_green", widget: "string"}
-                  - {label: "White", name: "color_white", widget: "string"}
-
+          # --- ENGLISH SECTION ---
           - label: "English (EN)"
             name: "en"
             widget: "object"
             fields:
-              - {label: "SEO Page Title", name: "pageTitle", widget: "string"}
-              - {label: "Power Output Label", name: "label_power", widget: "string"}
-              - {label: "Color/Finish Label", name: "label_finish", widget: "string"}
-              - {label: "Order Button", name: "btn_order", widget: "string"}
-              - {label: "Get Quote Button", name: "btn_quote", widget: "string"}
-              
-              - label: "Product 1: CDZ-J"
-                name: "p1"
-                widget: "object"
-                fields:
-                  - {label: "Title", name: "p1_title", widget: "string"}
-                  - {label: "Description", name: "p1_desc", widget: "text"}
+              - {label: "Page Title (SEO)", name: "pageTitle", widget: "string"}
+              - {label: "Home", name: "home", widget: "string"}
+              - {label: "Chargers", name: "chargers", widget: "string"}
+              - {label: "AC Chargers", name: "acChargers", widget: "string"}
+              - {label: "AC Description", name: "acDesc", widget: "string"}
+              - {label: "DC Chargers", name: "dcChargers", widget: "string"}
+              - {label: "DC Description", name: "dcDesc", widget: "string"}
+              - {label: "All Products", name: "allProducts", widget: "string"}
+              - {label: "About Us", name: "about", widget: "string"}
+              - {label: "Who We Are", name: "whoWeAre", widget: "string"}
+              - {label: "Certification", name: "certification", widget: "string"}
+              - {label: "Contact Us", name: "contact", widget: "string"}
+              - {label: "Gallery", name: "gallery", widget: "string"}
+              # Contact Modal
+              - {label: "Placeholder: Name", name: "contactName", widget: "string"}
+              - {label: "Placeholder: Email", name: "contactEmail", widget: "string"}
+              - {label: "Placeholder: Message", name: "contactMsg", widget: "string"}
+              - {label: "Button: Send", name: "contactBtn", widget: "string"}
 
-              - label: "Color Names"
-                name: "colors"
-                widget: "object"
-                fields:
-                  - {label: "Black", name: "color_black", widget: "string"}
-                  - {label: "Grey", name: "color_grey", widget: "string"}
-                  - {label: "Orange", name: "color_orange", widget: "string"}
-                  - {label: "Blue", name: "color_blue", widget: "string"}
-                  - {label: "Green", name: "color_green", widget: "string"}
-                  - {label: "White", name: "color_white", widget: "string"}
+              # --- პროდუქტების კატალოგი (თითოეული პროდუქტი ცალკე ფაილად) ---
+  - name: "products"
+    label: "პროდუქტების სია"
+    folder: "data/products" # აქ შეინახება JSON ფაილები
+    create: true # ახალი პროდუქტის დამატების უფლება
+    slug: "{{fields.ka.title}}"
+    extension: "json"
+    format: "json"
+    fields:
+      - {label: "კატეგორია (AC/DC)", name: "category", widget: "select", options: ["AC", "DC"]}
+      - {label: "რიგითი ნომერი (დასალაგებლად)", name: "order", widget: "number", default: 1}
 
-              
+      # --- ქართული მონაცემები ---
+      - label: "Georgian (KA)"
+        name: "ka"
+        widget: "object"
+        fields:
+          - {label: "სახელი (მაგ: CDZ-J)", name: "title", widget: "string"}
+          - {label: "აღწერა", name: "desc", widget: "text"}
+          - label: "ფერების სახელები"
+            name: "colors"
+            widget: "object"
+            fields:
+              - {label: "შავი", name: "color_black", widget: "string", default: "Midnight Black"}
+              - {label: "ნაცრისფერი", name: "color_grey", widget: "string", default: "Slate Grey"}
+              - {label: "ნარინჯისფერი", name: "color_orange", widget: "string", default: "Solar Orange"}
+              - {label: "ლურჯი", name: "color_blue", widget: "string", default: "Deep Blue"}
+              - {label: "მწვანე", name: "color_green", widget: "string", default: "Eco Green"}
+              - {label: "თეთრი", name: "color_white", widget: "string", default: "Pure White"}
+
+      # --- ინგლისური მონაცემები ---
+      - label: "English (EN)"
+        name: "en"
+        widget: "object"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Description", name: "desc", widget: "text"}
+          - label: "Color Names"
+            name: "colors"
+            widget: "object"
+            fields:
+              - {label: "Black", name: "color_black", widget: "string"}
+              - {label: "Grey", name: "color_grey", widget: "string"}
+              - {label: "Orange", name: "color_orange", widget: "string"}
+              - {label: "Blue", name: "color_blue", widget: "string"}
+              - {label: "Green", name: "color_green", widget: "string"}
+              - {label: "White", name: "color_white", widget: "string"}
+
+      # --- საერთო პარამეტრები (ფასი, კვტ, ფოტოები) ---
+      - label: "პარამეტრები (Common)"
+        name: "common"
+        widget: "object"
+        fields:
+          - label: "ვიზუალის ლეიბლი"
+            name: "visual_label"
+            widget: "select"
+            options: 
+              - {label: "Color", value: "label_color"}
+              - {label: "Edition", value: "label_edition"}
+              - {label: "Finish", value: "label_finish"}
+          - label: "ღილაკის ტიპი"
+            name: "button_type"
+            widget: "select"
+            options: 
+              - {label: "Order Now", value: "btn_order"}
+              - {label: "Get Quote", value: "btn_quote"}
+          - label: "სიმძლავრეები და ფასები"
+            name: "power_options"
+            widget: "list"
+            fields:
+              - {label: "kW (მაგ: 20kW)", name: "kw", widget: "string"}
+              - {label: "ფასი (მხოლოდ ციფრი)", name: "price", widget: "string"}
+          - label: "ფერების ვარიანტები და ფოტოები"
+            name: "color_variants"
+            widget: "list"
+            fields:
+              - {label: "ფერის გასაღები (უნდა ემთხვეოდეს ზედა 'colors' ველებს, მაგ: color_black)", name: "color_key", widget: "string"}
+              - {label: "HEX კოდი", name: "color_hex", widget: "string"}
+              - {label: "პროდუქტის ფოტო", name: "image", widget: "image"}
